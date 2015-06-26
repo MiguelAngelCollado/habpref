@@ -4981,35 +4981,35 @@ summary(verano$habitat.extracted)
 bl100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5056,35 +5056,35 @@ bl100dve
 cc100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5131,35 +5131,35 @@ cc100dve
 df100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5206,35 +5206,35 @@ df100dve
 dh100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5281,35 +5281,35 @@ dh100dve
 dl100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5358,35 +5358,35 @@ dl100dve
 dm100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5433,35 +5433,35 @@ dm100dve
 do100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5508,35 +5508,35 @@ do100dve
 eh100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5583,35 +5583,35 @@ eh100dve
 ef100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5658,35 +5658,35 @@ ef100dve
 hp100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5733,35 +5733,35 @@ hp100dve
 hb100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5808,35 +5808,35 @@ hb100dve
 mf100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5883,35 +5883,35 @@ mf100dve
 ow100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -5958,35 +5958,35 @@ ow100dve
 ss100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -6033,35 +6033,35 @@ ss100dve
 ww100dve=NULL
 for (n in 1:100){
   tri1<-subset(verano, subset=(verano$habitat.extracted == "Barren Land"))
-  tri1<-tri1[sample((nrow(tri1)), 100), ]
+  tri1<-tri1[sample((nrow(tri1)), 50), ]
   tri2<-subset(verano, subset=(verano$habitat.extracted == "Cultivated Crops"))
-  tri2<-tri2[sample((nrow(tri2)), 100), ]
+  tri2<-tri2[sample((nrow(tri2)), 50), ]
   tri3<-subset(verano, subset=(verano$habitat.extracted == "Deciduous Forest"))
-  tri3<-tri3[sample((nrow(tri3)), 100), ]
+  tri3<-tri3[sample((nrow(tri3)), 50), ]
   tri4<-subset(verano, subset=(verano$habitat.extracted == "Developed, High Intensity"))
-  tri4<-tri4[sample((nrow(tri4)), 100), ]
+  tri4<-tri4[sample((nrow(tri4)), 50), ]
   tri5<-subset(verano, subset=(verano$habitat.extracted == "Developed, Low Intensity"))
-  tri5<-tri5[sample((nrow(tri5)), 100), ]
+  tri5<-tri5[sample((nrow(tri5)), 50), ]
   tri6<-subset(verano, subset=(verano$habitat.extracted == "Developed, Medium Intensity"))
-  tri6<-tri6[sample((nrow(tri6)), 100), ]
+  tri6<-tri6[sample((nrow(tri6)), 50), ]
   tri7<-subset(verano, subset=(verano$habitat.extracted == "Developed, Open Space"))
-  tri7<-tri7[sample((nrow(tri7)), 100), ]
+  tri7<-tri7[sample((nrow(tri7)), 50), ]
   tri8<-subset(verano, subset=(verano$habitat.extracted == "Emergent Herbaceuous Wetlands"))
-  tri8<-tri8[sample((nrow(tri8)), 100), ]
+  tri8<-tri8[sample((nrow(tri8)), 50), ]
   tri9<-subset(verano, subset=(verano$habitat.extracted == "Evergreen Forest"))
-  tri9<-tri9[sample((nrow(tri9)), 100), ]
+  tri9<-tri9[sample((nrow(tri9)), 50), ]
   tri10<-subset(verano, subset=(verano$habitat.extracted == "Hay/Pasture"))
-  tri10<-tri10[sample((nrow(tri10)), 100), ]
+  tri10<-tri10[sample((nrow(tri10)), 50), ]
   tri11<-subset(verano, subset=(verano$habitat.extracted == "Herbaceuous"))
-  tri11<-tri11[sample((nrow(tri11)), 100), ]
+  tri11<-tri11[sample((nrow(tri11)), 50), ]
   tri12<-subset(verano, subset=(verano$habitat.extracted == "Mixed Forest"))
-  tri12<-tri12[sample((nrow(tri12)), 100), ]
+  tri12<-tri12[sample((nrow(tri12)), 50), ]
   tri13<-subset(verano, subset=(verano$habitat.extracted == "Open Water"))
-  tri13<-tri13[sample((nrow(tri13)), 100), ]
+  tri13<-tri13[sample((nrow(tri13)), 50), ]
   tri14<-subset(verano, subset=(verano$habitat.extracted == "Shrub/Scrub"))
-  tri14<-tri14[sample((nrow(tri14)), 100), ]
+  tri14<-tri14[sample((nrow(tri14)), 50), ]
   tri15<-subset(verano, subset=(verano$habitat.extracted == "Woody Wetlands"))
-  tri15<-tri15[sample((nrow(tri15)), 100), ]
+  tri15<-tri15[sample((nrow(tri15)), 50), ]
   veranete<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri10,tri11,tri12,tri13,tri14,tri15))
   #Creamos matriz de interacciones
   jiji <-aggregate (veranete$habitat.extracted ~ veranete$gen_sp, FUN = summary, Datos7)
@@ -6105,10 +6105,10 @@ for (n in 1:100){
 }
 ww100dve
 
-divve<-c(mean(bl100ve),mean(cc100ve),mean(df100ve),mean(dh100ve),mean(dl100ve)
-         ,mean(dm100ve), mean(do100ve), mean(eh100ve), mean(ef100ve), 
-         mean(hp100ve), mean(hb100ve), mean(mf100ve), mean(ow100ve), 
-         mean(ss100ve), mean(ww100ve))
+divve<-c(mean(bl100dve),mean(cc100dve),mean(df100dve),mean(dh100dve),mean(dl100dve)
+         ,mean(dm100dve), mean(do100dve), mean(eh100dve), mean(ef100dve), 
+         mean(hp100dve), mean(hb100dve), mean(mf100dve), mean(ow100dve), 
+         mean(ss100dve), mean(ww100dve))
 
 divve
 divrsd<-c(sd(bl100ve),sd(cc100ve),sd(df100ve),sd(dh100ve),sd(dl100ve)
