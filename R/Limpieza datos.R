@@ -1,10 +1,11 @@
+#Script de limpieza de los datos cedidos por Sam Droedge
 
 #Tomamos los datos nos vienen dados, este script es para limpiarlos
 d <- read.table("~/Desktop/Tesis/R/habpref full data/Combines Taxonomy File to Genus Augmented Flat File.txt", sep = "$", header = TRUE, quote = "", 
                 comment.char = "")
 #Establecemos working directory
-setwd("~/Desktop/Tesis/R/habpref full data/")
 getwd()
+setwd("~/Desktop/Tesis/R/habpref full data/")
 #Creamos unos datos de base
 write.csv(d,"Datosraw.csv")
 sd.1 <- d
@@ -27,8 +28,8 @@ sd.1$sex <- replace(sd.1$sex, sd.1$sex=="USGS_DRO10530", "unknown")
 sd.1$sex <- replace(sd.1$sex, sd.1$sex=="USGS_DRO10536", "unknown")
 sd.1$sex <- replace(sd.1$sex, sd.1$sex=="W", "unknown")
 summary(sd.1$sex)
-#Corregimos estado----
-#Vamos a por la variable state
+#Corregimos estado en la variable state----
+
 sd.2 <- sd.1
 str(sd.2)
 summary(sd.2$state)
@@ -44,8 +45,6 @@ sd.2$state <- replace(sd.2$state, sd.2$state=="USA", "xddddd")
 summary(sd.2$state)
 #Corregimos fecha y hora----
 sd.3 <- sd.2
-summary(sd.3$time1, maxsum = 500000)
-str(sd.3)
 # fix times where there is an "E" present (eg. 2.00309E+13 = 200309)
 # remove x's
 sd.3$time1 <- sub("x", "", sd.3$time1, fixed = TRUE)
@@ -113,13 +112,11 @@ a[["Agapostemon angelicus"]]
 a[["Agapostemon texanus"]]
 levels(sd.4$name)[levels(sd.4$name)=="Agapostemon angelicus"]<-"Agapostemon angelicus/texanus"
 levels(sd.4$name)[levels(sd.4$name)=="Agapostemon texanus"]<-"Agapostemon angelicus/texanus"
-#
 a[["Ceratina dupla/mikmaqi"]]
 a[["Ceratina dupla"]]
 a[["Ceratina mikmaqi"]]
 levels(sd.4$name)[levels(sd.4$name)=="Ceratina dupla"]<-"Ceratina dupla/mikmaqi"
 levels(sd.4$name)[levels(sd.4$name)=="Ceratina mikmaqi"]<-"Ceratina dupla/mikmaqi"
-#Halictus ligatus/poeyi
 a[["Halictus ligatus/poeyi"]]
 a[["Halictus ligatus"]]
 a[["Halictus poeyi"]]
@@ -127,21 +124,17 @@ a[["Nomada poeyi/ligatus"]]
 levels(sd.4$name)[levels(sd.4$name)=="Halictus ligatus"]<-"Halictus ligatus/poeyi"
 levels(sd.4$name)[levels(sd.4$name)=="Halictus poeyi"]<-"Halictus ligatus/poeyi"
 levels(sd.4$name)[levels(sd.4$name)=="Nomada poeyi/ligatus"]<-"Halictus ligatus/poeyi"
-#
 a[["Lasioglossum near_admirandum"]]
 a[["Lasioglossum admirandum"]]
 levels(sd.4$name)[levels(sd.4$name)=="Lasioglossum admirandum"]<-"Lasioglossum admirandum"
-#Lasioglossum viridatum_group
 a[["Lasioglossum viridatum_group"]]
 a[["Lasioglossum viridatum"]]
 levels(sd.4$name)[levels(sd.4$name)=="Lasioglossum viridatum"]<-"Lasioglossum viridatum_group"
-#"Hylaeus affinis/modestus"
 a[["Hylaeus affinis/modestus"]]
 a[["Hylaeus affinis"]]
 a[["Hylaeus modestus"]]
 levels(sd.4$name)[levels(sd.4$name)=="Hylaeus affinis"]<-"Hylaeus affinis/modestus"
 levels(sd.4$name)[levels(sd.4$name)=="Hylaeus modestus"]<-"Hylaeus affinis/modestus"
-#"Ceratina calcarata/dupla/mikmaqi"
 a[["Ceratina calcarata/dupla/mikmaqi"]]
 a[["Ceratina calcarata"]]
 a[["Ceratina dupla/mikmaqi"]]
@@ -159,11 +152,9 @@ levels(sd.4$name)[levels(sd.4$name)=="Ceratina dupla/calcarata"]<-"Ceratina calc
 levels(sd.4$name)[levels(sd.4$name)=="Ceratica calcarata/dupla"]<-"Ceratina calcarata/dupla/mikmaqi"
 levels(sd.4$name)[levels(sd.4$name)=="Ceratina mikmaqi/calcarata"]<-"Ceratina calcarata/dupla/mikmaqi"
 levels(sd.4$name)[levels(sd.4$name)=="Ceratina dupla/mikmaqi/calcarata"]<-"Ceratina calcarata/dupla/mikmaqi"
-#"Nomada bidentate_species_group"
 a[["Nomada bidentate_species_group"]]
 a[["Nomada bidentate_group"]]
 levels(sd.4$name)[levels(sd.4$name)=="Nomada bidentate_species_group"]<-"Nomada bidentate_group"
-#"Lasioglossum lepidii/puteulanum"
 a[["Lasioglossum lepidii/puteulanum"]]
 a[["Lasioglossum lepidii"]]
 a[["Lasioglossum puteulanum"]]
@@ -171,20 +162,16 @@ a[["Lasioglossum puteulanum/lepidii"]]
 levels(sd.4$name)[levels(sd.4$name)=="Lasioglossum lepidii"]<-"Lasioglossum lepidii/puteulanum"
 levels(sd.4$name)[levels(sd.4$name)=="Lasioglossum puteulanum"]<-"Lasioglossum lepidii/puteulanum"
 levels(sd.4$name)[levels(sd.4$name)=="Lasioglossum puteulanum/lepidii"]<-"Lasioglossum lepidii/puteulanum"
-#"Halictus poeyi/ligatus"
 a[["Halictus poeyi/ligatus"]]
 a[["Halictus poeyi"]]
 a[["Halictus ligatus"]]
 a[["Halictus ligatus/poeyi"]]
 levels(sd.4$name)[levels(sd.4$name)=="Halictus poeyi/ligatus"]<-"Halictus ligatus/poeyi"
 levels(sd.4$name)[levels(sd.4$name)=="Halictus poeyi"]<-"Halictus ligatus/poeyi"
-#"Lasioglossum affiliated_with_punctatoventre"
 a[["Lasioglossum affiliated_with_punctatoventre"]]
-#"Osmia pumila/atriventris" son pocas las quito
 a[["Osmia pumila/atriventris"]]
 a[["Osmia pumila"]]
 a[["Osmia atriventris"]]
-#"Lasioglossum admirandum/rohweri"
 a[["Lasioglossum admirandum/rohweri"]]
 a[["Lasioglossum admirandum"]]
 a[["Lasioglossum rohweri/lineatulum"]]
@@ -192,7 +179,6 @@ a[["Lasioglossum rohweri/admirandum"]]
 levels(sd.4$name)[levels(sd.4$name)=="Lasioglossum admirandum"]<-"Lasioglossum admirandum/rohweri"
 levels(sd.4$name)[levels(sd.4$name)=="Lasioglossum rohweri/lineatulum"]<-"Lasioglossum admirandum/rohweri"
 levels(sd.4$name)[levels(sd.4$name)=="Lasioglossum rohweri/admirandum"]<-"Lasioglossum admirandum/rohweri"
-#"Nomada sayi/illinoensis"
 a[["Nomada sayi/illinoensis"]]
 a[["Nomada sayi"]]
 a[["Nomada illinoensis"]]
@@ -200,20 +186,16 @@ a[["Nomada illinoensi/sayi"]]
 levels(sd.4$name)[levels(sd.4$name)=="Nomada sayi"]<-"Nomada sayi/illinoensis"
 levels(sd.4$name)[levels(sd.4$name)=="Nomada illinoensis"]<-"Nomada sayi/illinoensis"
 levels(sd.4$name)[levels(sd.4$name)=="Nomada illinoensi/sayi"]<-"Nomada sayi/illinoensis"
-#"Andrena imitatrix/morrisonella"
 a[["Andrena imitatrix/morrisonella"]]
 a[["Andrena imitatrix"]]
 a[["Andrena morrisonella"]]
 a[["Lasioglossum imitatrix/morrisonella"]]
 levels(sd.4$name)[levels(sd.4$name)=="Andrena imitatrix/morrisonella"]<-"Lasioglossum imitatrix/morrisonella"
-#"Lasioglossum near_puteulanum"
 a[["Lasioglossum near_puteulanum"]]
 a[["Lasioglossum puteulanum"]]
 levels(sd.4$name)[levels(sd.4$name)=="Lasioglossum near_puteulanum"]<-"Lasioglossum lepidii/puteulanum"
-#"Osmia near_collinsiae"
 a[["Osmia near_collinsiae"]]
 a[["Osmia collinsiae"]]
-#"Lasioglossum near_ruidosense"
 a[["Lasioglossum near_ruidosense"]]
 a[["Lasioglossum ruidosense"]]
 a<-summary(sd.4$name, maxsum=5000)
@@ -233,7 +215,7 @@ sd.4<-subset(sd.4, subset=(!sd.4$name == "" & !sd.4$name == "??" &
                              !sd.4$name == "Nomada species"&
                              !sd.4$name == "Hylaeus species"
                              ))
-#Filtramos ahora por coordenadas
+#Filtramos ahora por coordenadas-----
 sd.5<-sd.4 
 summary(sd.5$latitude)
 summary(sd.5$longitude)
@@ -329,7 +311,7 @@ plot(lemap)
 points(locs.merc, pch = 4, col = "red")
 
 
-#Ahora filtremos más nombres raros--------
+#Ahora filtremos más nombres raros-----
 sd.8<-sd.7
 b<-summary(sd.8$name, maxsum=860)
 
@@ -534,7 +516,7 @@ b[["Colletes inaequalis"]]
 b[["Hylaeus ornatus_black"]]
 b[["Hylaeus black-ornatus"]]
 b[["Hylaeus black_ornatus"]]
-#Eliminamos singletones mal escritos
+#Eliminamos singletones mal escritos-----
 sd.9<-sd.8
 
 sd.9<-subset(sd.9, subset=(!sd.9$name == "" & !sd.9$name == "??" & 
@@ -689,25 +671,15 @@ names(sd.9)
 sd.10<-sd.9
 names(sd.10)[which(names(sd.10)=="sd.genus")]="Genus"
 names(sd.10)[which(names(sd.10)=="name")]="Species"
-##
 
-
-##
 #Ya tenemos aislados los habitats, ahora retiramos las columnas que no nos interesan de 
 #nuestro dataframe
-
-
 names(sd.10)
 sd.11 <- subset(sd.10, select = c("Genus", "Species","id","latitude","longitude","sex","Speciesnotes","IDs1","IDs","ip","accuracy","elevation","country","state","county","city","site","position","method","bowl.num","bowl.size","bowl.col","bowl.fill","habitat","field_note","year1","year2","month1","month2","day1","day2","hours1","hours2","min1","min2"))
 head(sd.11)
 
-
 names(sd.11)[which(names(sd.11)=="Species")]="gen_sp"
 names(sd.11)[which(names(sd.11)=="cover2")]="habitat.extracted"
-
-
-
-
 
 #Creamos un identificador individual para cada site####
 sd.12<-unique(sd.11[,c("latitude","longitude")])
@@ -720,7 +692,6 @@ sd.13<-merge(sd.12,sd.11)
 summary(sd.13$IDsite)
 View(sd.13)
 nrow(sd.13)
-#####
 
 #Tras unas anotaciones de Sam tenemos que hacer estos cambios
 names(sd.13)[which(names(sd.13)=="id")]="COLLECTIONdb"
@@ -1244,7 +1215,6 @@ names(sd.z)[which(names(sd.z)=="cover2")]="habitat.extracted"
 sd.uno
 sd.tres<-sd.z
 sd.14<-rbind(sd.uno,sd.dos,sd.tres)
-####
 View(sd.14)
 str(sd.14)
 summary(sd.14$habitat.extracted)
@@ -1300,7 +1270,7 @@ summary(sd.17$habitat.extracted)
 sd.17<-rbind(sd.14,sd.15)
 levels(sd.17$habitat.extracted)[levels(sd.17$habitat.extracted)=="Open Water"]<-"Coastal"
 
-#Con estos datos ya podemos trabajar
+#Con estos datos ya podemos trabajar, son los que importaremos en el resto de scripts
 getwd()
 write.csv(sd.17,"Datos1.csv")
 
