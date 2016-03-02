@@ -578,7 +578,6 @@ names(avoiders)<-c("BarrenLand", "Coastal", "Cultivated Crops" ,"DeciduousForest
 names(observeds)<-c("BarrenLand", "Coastal", "Cultivated Crops", "DeciduousForest", "DevelopedHighIntensity", "DevelopedLowIntensity", "DevelopedMediumIntensity","DevelopedOpenSpace","EmergentHerbaceuousWetlands", "EvergreenForest","Herbaceuous/Hay/Pasture","MixedForest","ShrubScrub","WoodyWetlands")
 
 
-
 #Los que tengan valores negativos o el 0 serán exploiters
 exploiters<-(mayor-observeds)
 names(exploiters)<-c("BarrenLand", "Coastal", "Cultivated Crops" ,"DeciduousForest", "DevelopedHighIntensity", "DevelopedLowIntensity", "DevelopedMediumIntensity","DevelopedOpenSpace","EmergentHerbaceuousWetlands", "EvergreenForest","Herbaceuous/Hay/Pasture","MixedForest","ShrubScrub","WoodyWetlands")
@@ -2611,3 +2610,14 @@ summary(Datos.ptilothrix$habitat.extracted)
 Datos.xylocopa<-subset(Datos1, subset=(Datos1$Genus=="Xylocopa"))
 nrow(Datos.xylocopa)
 summary(Datos.xylocopa$habitat.extracted)
+
+
+#Diversidad de habitats----
+#Aquí vamos a calcular la diversidad de habitats preferidos por las diferentes especies
+#Para ello, convertirmos en NA todo lo que no indique preferencia, y lo que indique preferencia
+#lo transformamos en 1, para sumarlo y que nos diga el número de preferencias de habitat
+exploiters
+d.exploiters<-replace(exploiters, exploiters>0, NA)
+d.exploiters<-replace(d.exploiters, is.na(d.exploiters)==FALSE, 1)
+diversity.exploiters<-rowSums(d.exploiters, na.rm = TRUE)
+diversity.exploiters
