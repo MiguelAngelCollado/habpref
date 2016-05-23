@@ -2,7 +2,7 @@
 #Strength y richness full data sin repeticiones en el punto de muestreo
 Datos1 <- read.csv("~/Desktop/Tesis/R/habpref full data/Datos1.csv")
 getwd()
-
+observeds
 #Agruamos habitats herbaceos con pastos
 Datos1$habitat.extracted <- replace(Datos1$habitat.extracted, Datos1$habitat.extracted=="Hay/Pasture", "Herbaceuous")
 #Agrupamos habitats como en el paper de Koh et al 2015
@@ -14,7 +14,7 @@ summary(Datos1$habitat.extracted)
 
 sumcord<-(Datos1$latitude + Datos1$longitude)
 Datos9<-(cbind(Datos1,sumcord))
-
+USO
 
 tonto<- unique(Datos9[,c("sumcord", "gen_sp")])
 identifi<-rep("SI",nrow(tonto))
@@ -165,11 +165,42 @@ Datos6<-subset(Datos1, subset=(!Datos1$gen_sp == "Triepeolus obliteratus" &
                                  !Datos1$gen_sp == "Anthophorula micheneri"&
                                  !Datos1$gen_sp == "Andrena clarkella"&
                                  !Datos1$gen_sp == "Chrysis angolensis"&
+                                 !Datos1$gen_sp == "Andrena aurata"&
+                                 !Datos1$gen_sp == "Andrena bruneri"&
+                                 !Datos1$gen_sp == "Andrena gardineri"&
+                                 !Datos1$gen_sp == "Andrena maculata"&
+                                 !Datos1$gen_sp == "Andrena pura"&
+                                 !Datos1$gen_sp == "Andrena vidae"&
+                                 !Datos1$gen_sp == "Augochlora aurata"&
+                                 !Datos1$gen_sp == "Augochlorella persimillus"&
+                                 !Datos1$gen_sp == "Chrysis krombeini"&
+                                 !Datos1$gen_sp == "Dolichovespula albida"&
+                                 !Datos1$gen_sp == "Epeolus howardi"&
+                                 !Datos1$gen_sp == "Heriades truncorum"&
+                                 !Datos1$gen_sp == "hoplitis spoliata"&
+                                 !Datos1$gen_sp == "Hylaeus basalis"&
+                                 !Datos1$gen_sp == "Hylaeus leptocephala"&
+                                 !Datos1$gen_sp == "Hylaeus messilae"&
+                                 !Datos1$gen_sp == "Hylaeus messillae"&
+                                 !Datos1$gen_sp == "Lasioglossum paraforbesii"&
+                                 !Datos1$gen_sp == "lasioglossum vierecki"&
+                                 !Datos1$gen_sp == "Megachile umbripennis"&
+                                 !Datos1$gen_sp == "Melissodes apicata"&
+                                 !Datos1$gen_sp == "Nomada lutuoloides"&
+                                 !Datos1$gen_sp == "Nomada obliterata"&
+                                 !Datos1$gen_sp == "Nomada seneciophila"&
+                                 !Datos1$gen_sp == "Nomada texana"&
+                                 !Datos1$gen_sp == "Pseudopanurgus solidaginis"&
+                                 !Datos1$gen_sp == "Pseudopanurgus virginicus"&
+                                 !Datos1$gen_sp == "Scolia dubia"&
+                                 !Datos1$gen_sp == "Sphex nudus"&
+                                 !Datos1$gen_sp == "Triepeolus concavus"&
+                                 !Datos1$gen_sp == "Vespula vulgaris"&
                                  !Datos1$gen_sp == ""))
 
 #Extracción de matriz de interacciones y filtrado para solo usar especies con más
 #de 100 individuos en nuestro muestreo
-
+summary(Datos6$gen_sp, maxsum=500)
 jiji <-aggregate (Datos6$habitat.extracted ~ Datos6$gen_sp, FUN = summary, Datos6)
 juju<-c(jiji)
 juju
@@ -187,8 +218,10 @@ momomosb<-cbind(momomo,summmm)
 momomost<-subset(momomosb, subset=momomosb$summmm>100)
 momomost<-momomost[,1:15]
 observeds<-momomost
+View(observeds)
+nmodels
 rownames(observeds)
-
+a
 
 library(bipartite)
 #Con este comando extraemos 1000 matrices de interacción de esperados
@@ -581,6 +614,8 @@ names(observeds)<-c("BarrenLand", "Coastal", "Cultivated Crops", "DeciduousFores
 #Los que tengan valores negativos o el 0 serán exploiters
 exploiters<-(mayor-observeds)
 names(exploiters)<-c("BarrenLand", "Coastal", "Cultivated Crops" ,"DeciduousForest", "DevelopedHighIntensity", "DevelopedLowIntensity", "DevelopedMediumIntensity","DevelopedOpenSpace","EmergentHerbaceuousWetlands", "EvergreenForest","Herbaceuous/Hay/Pasture","MixedForest","ShrubScrub","WoodyWetlands")
+
+
 
 #Para evaluar la preferencia, necesitamos que las especies se distribuyan de forma amplia
 #no solo en nuestro subset, por eso vamos a comprobar qué especies se distribuyen de forma
@@ -1096,7 +1131,7 @@ nrow(averr)
 satellite.map(aver)
 
 
-#Número de exploiters por habitat (42 especies de referencia)----
+#Número de exploiters por habitat (45 especies de referencia)----
 nrow(exploiters)
 nexploiters<-NULL
 for(n in 1:(ncol(exploiters))){
@@ -1127,6 +1162,42 @@ nindifferent<-indifferent-navoiders-nexploiters
 colnames(nindifferent)<-c("nindifferent")
 
 PREFERENCE<-cbind(nexploiters,navoiders,nindifferent)
+
+
+#Lista de especies que prefieren cada habitat----
+names(exploiters)
+row.names(subset(exploiters, subset=(exploiters[,1]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,2]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,3]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,4]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,5]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,6]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,7]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,8]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,9]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,10]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,11]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,12]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,13]<0.1)))
+row.names(subset(exploiters, subset=(exploiters[,14]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,1]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,2]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,3]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,4]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,5]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,6]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,7]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,8]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,9]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,10]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,11]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,12]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,13]<0.1)))
+row.names(subset(avoiders, subset=(avoiders[,14]<0.1)))
+
+
+
+#
 
 mean(nexploiters$nexploiters)
 mean(navoiders$navoiders)
@@ -1592,13 +1663,11 @@ rownames(observeds)
 nrow(observeds)
 
 library(bipartite)
+
+
 #Con este comando extraemos 1000 matrices de interacción de esperados
 nmodels<-nullmodel(observeds, N=1000, method="r2dtable")
 head(observeds)
-
-
-
-
 
 
 
@@ -2550,6 +2619,7 @@ write.csv(namesexploiters, "exploitersyavoiders.csv")
 
 #Ahora quiero ver qué sucede con los diferentes géneros
 avoiders
+
 #Sospecho que las andrenas no quieren los habitats developed high
 
 names(Datos1)
@@ -2611,6 +2681,85 @@ Datos.xylocopa<-subset(Datos1, subset=(Datos1$Genus=="Xylocopa"))
 nrow(Datos.xylocopa)
 summary(Datos.xylocopa$habitat.extracted)
 
+#Traits-----
+#Cargo base de datos de traits para ver si encuentro algo
+traits <- read.csv("~/Desktop/Tesis/Habitat preferences/Data/Traits de abejas.csv")
+names(traits)
+View(traits)
+#Hago un objeto con la IT
+IT.mean<-aggregate(traits$ITfam ~ traits$Genus, FUN=mean)
+summary(traits$ITfam)
+boxplot(traits$ITfam ~ traits$Genus) 
+plot(IT.mean) 
+IT.mean
+#Nidos
+nests<-aggregate(traits$Nest_location ~ traits$Genus, FUN=summary)
+nests<-c(nests)
+nests<-as.data.frame(nests)
+View(nests)
+rownames(nests) <- nests$traits.Genus
+nests
+#Dieta
+diet<-aggregate(traits$Dietary_specialization ~ traits$Genus, FUN=summary)
+diet<-c(diet)
+diet<-as.data.frame(diet)
+rownames(diet)<-nests$traits.Genus
+diet
+
+#Sociality
+social<-aggregate(traits$Sociality ~ traits$Genus, FUN=summary)
+social<-c(social)
+social<-as.data.frame(social)
+rownames(social)<-nests$traits.Genus
+social
+#Voltinism
+volt<-aggregate(traits$Voltinism ~ traits$Genus, FUN=summary)
+volt<-c(volt)
+volt<-as.data.frame(volt)
+rownames(volt)<-volt$traits.Genus
+volt
+#Phenology
+boxplot(traits$pheno_q10, traits$Pheno_mean, traits$pheno_q90)
+mean(traits$Pheno_mean)
+median(traits$Pheno_mean)
+phen<-aggregate(traits$pheno_q10 ~ traits$Genus, FUN=summary)
+phen<-as.data.frame(phen)
+rownames(phen)<-phen$traits.Genus
+phen
+
+#Comprobamos si los que tienen preferencia por deciduous forest tienen temprana fenología
+rownames(subset(exploiters, subset=(exploiters$DeciduousForest < 0.01)))
+rownames(subset(avoiders, subset=(avoiders$DeciduousForest < 0.01)))
+
+View(traits)
+#los exploiters
+traits[23,18]
+traits[39,18]
+traits[70,18]
+traits[109,18]
+traits[107,18]
+traits[115,18]
+traits[116,18]
+traits[122,18]
+traits[174,18]
+d.mean.exp<-c(traits[23,18],traits[39,18],traits[70,18],traits[109,18],traits[107,18],traits[115,18],traits[116,18],traits[122,18],traits[174,18])
+#los avoiders
+traits[4,18]
+traits[73,18]
+traits[85,18]
+traits[112,18]
+traits[129,18]
+traits[134,18]
+traits[138,18]
+traits[148,18]
+traits[161,18]
+#Parece que los avoiders tienen una fenología tardía
+d.mean.avo<-c(traits[4,18],traits[73,18],traits[85,18],traits[112,18],traits[129,18],traits[134,18],traits[138,18],traits[148,18],traits[161,18])
+boxplot(traits$Pheno_mean, d.mean.exp,d.mean.avo, names=nomnom, ylab="Mean Phenology")
+nomnom<-c("Reference","Deciduous exploiters","Deciduous avoiders")
+mean(d.mean.avo)
+mean(d.mean.exp)
+#
 
 #Diversidad de habitats----
 #Aquí vamos a calcular la diversidad de habitats preferidos por las diferentes especies
@@ -2621,3 +2770,1554 @@ d.exploiters<-replace(exploiters, exploiters>0, NA)
 d.exploiters<-replace(d.exploiters, is.na(d.exploiters)==FALSE, 1)
 diversity.exploiters<-rowSums(d.exploiters, na.rm = TRUE)
 diversity.exploiters
+
+#Uso de habitats-----
+#queremos rareficar los datos y sacar el uso de habitats, para eso necesitaremos la 
+#presencia/ausencia de cada especie en cada uno de los habitats
+Datos6
+summary(Datos6$habitat.extracted)
+
+
+#Creamos una matriz de interacciones con nuestros datos
+int.mat<-aggregate(Datos6$habitat.extracted~Datos6$gen_sp, FUN = summary, Datos6)
+jeje<-c(int.mat)
+jiji<-c(jaja)
+#lo convertimos en dataframe
+jeje<-as.data.frame(jeje)
+jiji<-as.data.frame(jeje)
+jejem<-jeje[,-1]
+jejem<-apply(jejem, MARGIN=2, FUN=as.numeric)
+row.names(jejem)<- jeje[,1]
+#Esta es nuestra matriz
+int.mat<-jejem
+nrow(int.mat)
+View(int.mat)
+#Cálculos de coverage :DDDDD
+#vemos a qué tamaño muestral cubrimos qué porcentaje de riqueza de habitat con la función
+#iNEXT, en cada habitat
+library(iNEXT)
+#Con este loop vemos el coverage de cada habitat
+for( n in 1:15){
+  a<-iNEXT(int.mat[,n],datatype = "abundance", endpoint = 805)
+  print(a$iNextEst)
+}
+#Vemos cuanto coverage tiene el habitat que menos individuos tiene, el cual es "herbaceuous"
+iNEXT(int.mat[,1],datatype = "abundance", endpoint = 176)
+iNEXT(int.mat[,2],datatype = "abundance", endpoint = 843)
+iNEXT(int.mat[,3],datatype = "abundance", endpoint = 1680)
+iNEXT(int.mat[,4],datatype = "abundance", endpoint = 5453)
+iNEXT(int.mat[,5],datatype = "abundance", endpoint = 360)
+iNEXT(int.mat[,6],datatype = "abundance", endpoint = 805)
+iNEXT(int.mat[,7],datatype = "abundance", endpoint = 545)
+iNEXT(int.mat[,8],datatype = "abundance", endpoint = 1499)
+iNEXT(int.mat[,9],datatype = "abundance", endpoint = 456)
+iNEXT(int.mat[,10],datatype = "abundance", endpoint = 405)
+iNEXT(int.mat[,11],datatype = "abundance", endpoint = 0)
+iNEXT(int.mat[,12],datatype = "abundance", endpoint = 1577)
+iNEXT(int.mat[,13],datatype = "abundance", endpoint = 591)
+iNEXT(int.mat[,14],datatype = "abundance", endpoint = 159)
+iNEXT(int.mat[,15],datatype = "abundance", endpoint = 1213)
+
+#Shrub/Scrub que es el que menos individuos tiene tiene un coverage de 0.617
+#Ahora tenemos que buscar cuantos individuos tenemos que tomar de cada habitat para tener el
+#mismo coverage
+int.mat<-int.mat[,-11]
+colnames(int.mat)
+samplesize<-NULL
+for (n in 1:14){
+  c<-estimateD(int.mat[,n], datatype = "abundance", base= "coverage", level = 0.60)
+  samplesize[n]<-c
+}
+colnames(int.mat)
+samplesize
+samplesize<-as.data.frame(samplesize)
+nombres<-c("BL","CO","CC","DF","DH","DL","DM","DO", "EH","EF","HB","MF","SS","WW")
+colnames(samplesize)<-nombres
+#Tenemos el tamaño que muestral que tenemos que coger de cada habitat para que el coverage
+#sea el mismo
+samplesize
+#restamos para comprobar que tenemos suficiente muestra en nuestro dataframe
+#al ser todo valores positivos indican que si tenemos suficiente muestra
+summary(Datos6$habitat.extracted) - samplesize 
+summary(Datos6$habitat.extracted)
+#Ahora hacemos un loop, para extraer los individuos que correspondan para cada habitat 
+#para igualar la misma coverage 
+
+
+#Sacamos matriz de interacción
+
+
+#Hacemos una lista, donde en cada especie se nos dirá cuanto aparece en cada habitat
+intd6<-tapply(Datos6$habitat.extracted, Datos6$gen_sp, FUN = summary)
+#Convertimos la lista en un gran vector, y luego en dataframe
+intd6<-unlist(intd6)
+length(intd6)
+intd6 <- as.data.frame(intd6)
+rownames(intd6)
+#Queremos crear un dataframe de referencia al que le iremos pegando (merge) los 100 vectores
+#resultantes de la rarefacción
+a<- rep(x = NA,nrow(intd6))
+d <- data.frame(a)
+nombrecitos<-d
+rownames(d)<-rownames(intd6)
+rownames(d)
+#"d" es el dataframe que hemos preparado, con el mismo rownames, para ir guardando
+#vectores con la abundancia de especies en cada habitat
+
+samplesize
+###Hacemos un loop para rareficar, tomando muestras igualando por coverage
+for (n in 1:100) {
+  bri1<-subset(Datos6, subset=(Datos6$habitat.extracted == "Barren Land"))
+  bri1<-bri1[sample((nrow(bri1)), 134), ]
+  bri2<-subset(Datos6, subset=(Datos6$habitat.extracted == "Cultivated Crops"))
+  bri2<-bri2[sample((nrow(bri2)), 114), ]
+  bri3<-subset(Datos6, subset=(Datos6$habitat.extracted == "Deciduous Forest"))
+  bri3<-bri3[sample((nrow(bri3)), 146), ]
+  bri4<-subset(Datos6, subset=(Datos6$habitat.extracted == "Developed, High Intensity"))
+  bri4<-bri4[sample((nrow(bri4)), 91), ]
+  bri5<-subset(Datos6, subset=(Datos6$habitat.extracted == "Developed, Low Intensity"))
+  bri5<-bri5[sample((nrow(bri5)), 131), ]
+  bri6<-subset(Datos6, subset=(Datos6$habitat.extracted == "Developed, Medium Intensity"))
+  bri6<-bri6[sample((nrow(bri6)), 105), ]
+  bri7<-subset(Datos6, subset=(Datos6$habitat.extracted == "Developed, Open Space"))
+  bri7<-bri7[sample((nrow(bri7)), 124), ]
+  bri8<-subset(Datos6, subset=(Datos6$habitat.extracted == "Emergent Herbaceuous Wetlands"))
+  bri8<-bri8[sample((nrow(bri8)), 154), ]
+  bri9<-subset(Datos6, subset=(Datos6$habitat.extracted == "Evergreen Forest"))
+  bri9<-bri9[sample((nrow(bri9)), 171), ]
+  bri11<-subset(Datos6, subset=(Datos6$habitat.extracted == "Herbaceuous/Hay/Pasture"))
+  bri11<-bri11[sample((nrow(bri11)), 122), ]
+  bri12<-subset(Datos6, subset=(Datos6$habitat.extracted == "Mixed Forest"))
+  bri12<-bri12[sample((nrow(bri12)), 145), ]
+  bri13<-subset(Datos6, subset=(Datos6$habitat.extracted == "Coastal"))
+  bri13<-bri13[sample((nrow(bri13)), 164), ]
+  bri14<-subset(Datos6, subset=(Datos6$habitat.extracted == "Shrub/Scrub"))
+  bri14<-bri14[sample((nrow(bri14)), 143), ]
+  bri15<-subset(Datos6, subset=(Datos6$habitat.extracted == "Woody Wetlands"))
+  bri15<-bri15[sample((nrow(bri15)), 146), ]
+  
+  Datos7<-(rbind(bri1,bri2,bri3,bri4,bri5,bri6,bri7,bri8,bri9,bri11,bri12,bri13,bri14,bri15))
+  #Sacamos matriz de interacción, en forma de lista, con todas las abundancias de cada
+  #especie en cada habitat
+  int<-tapply(Datos7$habitat.extracted, Datos7$gen_sp, FUN = summary)
+  #Deslistamos en un vector más fácil para operar
+  int.u<- unlist(int)
+  length(int.u)
+  #Sustituimos abundancia por presencia/ausencia
+  int.u<-replace(int.u, int.u>1,1)
+  
+  #Unimos el vector de presencia/ausencia al data frame, al unir por row.names
+  #nos crea en la unión una colunma nueva, que eliminamos
+  d <- merge(d,int.u, by="row.names",all=TRUE)
+  row.names(d)<-row.names(intd6)
+  d<-d[,-1]
+  }
+#Cambiamos los NA por 0
+d[is.na(d)] <-  0
+rowSums(d)
+#Hacemos una columna con la suma de las 100 repeticiones, si el resultado es mayor a uno
+summary(Datos6$habitat.extracted) 
+#hay USO
+d$suma <- rowSums(d)
+d$uso <- rowSums(d)
+d$uso <- replace(d$uso, d$uso>0, "YES")
+d$uso <- replace(d$uso, d$uso==0, "NO")
+d$uso.n <- d$suma
+d$uso.n <- replace(d$uso.n, d$uso.n >1,1)
+d$rnames <- row.names(d) 
+#Creamos data frame con los resultados del uso
+uso<- data.frame(d$rnames,d$suma,d$uso.n,d$uso)
+row.names(uso) <- row.names(intd6)
+espacio <- regexpr(pattern = " ", uso$d.rnames)
+uso$genus<-substr(uso$d.rnames, start = 0 , stop = espacio - 1) 
+uso$genus <- as.factor(uso$genus)
+summary(uso$genus)
+
+
+#Creamos una columna con habitats a partir de los rownames##
+summary(uso$genus)
+h1 <- regexpr(pattern = "Barren Land", uso$d.rnames)
+habitat.extracted <- substr(uso$d.rnames, start = h1, stop = 100)
+h2 <- regexpr(pattern = "Coastal", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h2, stop = 100)
+h3 <- regexpr(pattern = "Cultivated Crops", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h3, stop = 100)
+h4 <- regexpr(pattern = "Deciduous Forest", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h4, stop = 100)
+h5 <- regexpr(pattern = "Developed, H", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h5, stop = 100)
+h6 <- regexpr(pattern = "Developed, Lo", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h6, stop = 100)
+h7 <- regexpr(pattern = "Developed, Med", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h7, stop = 100)
+h8 <- regexpr(pattern = "Developed, Op", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h8, stop = 100)
+h9 <- regexpr(pattern = "Emerg", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h9, stop = 100)
+h10 <- regexpr(pattern = "Evergr", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h10, stop = 100)
+h11 <- regexpr(pattern = "Herbaceuous/Hay/Pasture", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h11, stop = 100)
+h12 <- regexpr(pattern = "Mixed", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h12, stop = 100)
+h13 <- regexpr(pattern = "Shrub", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h13, stop = 100)
+h14 <- regexpr(pattern = "Woody", uso$d.rnames)
+habitat.extracted <- substr(habitat.extracted, start = h14, stop = 100)
+
+uso
+#Unimos la nueva columna
+uso.1<-cbind(uso,habitat.extracted)
+View(uso.1)
+#Retiramos el Hay/Pasture que siempre va a ser 0
+uso.2<-subset(uso.1, subset=(uso.1$habitat.extracted=="Barren Land" | uso.1$habitat.extracted=="Coastal" | uso.1$habitat.extracted== "Cultivated Crops" | uso.1$habitat.extracted=="Deciduous Forest" | uso.1$habitat.extracted=="Developed, High Intensity" | uso.1$habitat.extracted=="Developed, Low Intensity" | uso.1$habitat.extracted=="Developed, Medium Intensity" | uso.1$habitat.extracted=="Developed, Open Space" | uso.1$habitat.extracted=="Emergent Herbaceuous Wetlands" | uso.1$habitat.extracted=="Evergreen Forest" | uso.1$habitat.extracted=="Herbaceuous/Hay/Pasture" | uso.1$habitat.extracted=="Mixed Forest" | uso.1$habitat.extracted=="Shrub/Scrub" | uso.1$habitat.extracted=="Woody Wetlands"))
+View(uso.2)
+#Uso general----
+#Veamos el uso de cada habitat, para eso construimos un data.frame con el uso
+uso.BL <- subset(uso.2, subset=(uso.2$habitat.extracted=="Barren Land"))
+ny.BL <-  as.vector(summary(uso.BL$d.uso))
+uso.CO <- subset(uso.2, subset=(uso.2$habitat.extracted=="Coastal"))
+ny.CO <-  as.vector(summary(uso.CO$d.uso))
+uso.CC <- subset(uso.2, subset=(uso.2$habitat.extracted=="Cultivated Crops"))
+ny.CC <-  as.vector(summary(uso.CC$d.uso))
+uso.DF <- subset(uso.2, subset=(uso.2$habitat.extracted=="Deciduous Forest"))
+ny.DF <-  as.vector(summary(uso.DF$d.uso))
+uso.DH <- subset(uso.2, subset=(uso.2$habitat.extracted=="Developed, High Intensity"))
+ny.DH <-  as.vector(summary(uso.DH$d.uso))
+uso.DL <- subset(uso.2, subset=(uso.2$habitat.extracted=="Developed, Low Intensity"))
+ny.DL <-  as.vector(summary(uso.DL$d.uso))
+uso.DM <- subset(uso.2, subset=(uso.2$habitat.extracted=="Developed, Medium Intensity"))
+ny.DM <-  as.vector(summary(uso.DM$d.uso))
+uso.DO <- subset(uso.2, subset=(uso.2$habitat.extracted=="Developed, Open Space"))
+ny.DO <-  as.vector(summary(uso.DO$d.uso))
+uso.EH <- subset(uso.2, subset=(uso.2$habitat.extracted=="Emergent Herbaceuous Wetlands"))
+ny.EH <-  as.vector(summary(uso.EH$d.uso))
+uso.EF <- subset(uso.2, subset=(uso.2$habitat.extracted=="Evergreen Forest"))
+ny.EF <-  as.vector(summary(uso.EF$d.uso))
+uso.HH <- subset(uso.2, subset=(uso.2$habitat.extracted=="Herbaceuous/Hay/Pasture"))
+ny.HH <-  as.vector(summary(uso.HH$d.uso))
+uso.MF <- subset(uso.2, subset=(uso.2$habitat.extracted=="Mixed Forest"))
+ny.MF <-  as.vector(summary(uso.MF$d.uso))
+uso.SS <- subset(uso.2, subset=(uso.2$habitat.extracted=="Shrub/Scrub"))
+ny.SS <-  as.vector(summary(uso.SS$d.uso))
+uso.WW <- subset(uso.2, subset=(uso.2$habitat.extracted=="Woody Wetlands"))
+ny.WW <-  as.vector(summary(uso.WW$d.uso))
+
+ny.uso <- rbind(ny.BL,ny.CO,ny.CC,ny.DF,ny.DH,ny.DL,ny.DM,ny.DO,ny.EH,ny.EF,ny.HH,ny.MF,ny.SS,ny.WW)
+row.names(ny.uso) <-c("BarrenLand", "Coastal", "Cultivated Crops" ,"DeciduousForest", "DevelopedHighIntensity", "DevelopedLowIntensity", "DevelopedMediumIntensity","DevelopedOpenSpace","EmergentHerbaceuousWetlands", "EvergreenForest","Herbaceuous/Hay/Pasture","MixedForest","ShrubScrub","WoodyWetlands")
+colnames(ny.uso) <- c("NO","YES")
+USO <- ny.uso
+rowSums(USO)
+nrow(Datos6)
+#Exploramos por género----
+View(uso.2)
+#Veamos si las Andrenas evitan habitats antropizados
+Andrena.uso <- subset(uso.2, subset=(uso.2$genus == "Andrena"))
+View(Andrena.uso)
+#Número de especies
+nrow(Andrena.uso)/14
+
+Andrena.uso.d <- subset(Andrena.uso, subset=(Andrena.uso$habitat.extracted == "Developed, High Intensity" | Andrena.uso$habitat.extracted == "Developed, Medium Intensity" | Andrena.uso$habitat.extracted == "Developed, Low Intensity" | Andrena.uso$habitat.extracted == "Developed, Open Space" | Andrena.uso$habitat.extracted == "Cultivated Crops"))
+Andrena.uso.n <- subset(Andrena.uso, subset=(!Andrena.uso$habitat.extracted == "Developed, High Intensity" & !Andrena.uso$habitat.extracted == "Developed, Medium Intensity" & !Andrena.uso$habitat.extracted == "Developed, Low Intensity" & !Andrena.uso$habitat.extracted == "Developed, Open Space" & !Andrena.uso$habitat.extracted == "Cultivated Crops"))
+head(Andrena.uso.d)
+head(Andrena.uso.n)
+#El uso de andrena de habitats antropizados
+summary(Andrena.uso$d.uso)
+View(Andrena.uso.d)
+summary(Andrena.uso.d$d.uso)
+
+#El uso en cada habitat
+Andrena.uso.dh <- subset(Andrena.uso, Andrena.uso$habitat.extracted=="Developed, High Intensity")
+#Quiero ver las especies de andrena que usan estos habitats desarrollados
+which(Andrena.uso.dh$d.uso == "YES" )
+row.names(Andrena.uso.dh[c(which(Andrena.uso.dh$d.uso == "YES" )),])
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Developed, High Intensity"))
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Developed, Medium Intensity"))
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Developed, Low Intensity"))
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Developed, Open Space"))
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Barren Land"))
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Coastal"))
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Deciduous Forest"))
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Emergent Herbaceuous Wetlands"))
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Evergreen Forest"))
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Herbaceuous/Hay/Pasture"))
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Mixed Forest"))
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Shrub/Scrub"))
+summary(subset(Andrena.uso$d.uso, Andrena.uso$habitat.extracted=="Woody Wetlands"))
+
+
+summary(Andrena.uso.d$d.uso) + summary(Andrena.uso.n$d.uso)
+View(Andrena.uso.d)
+
+
+#Vemos los Lasiolgossum
+Lasioglossum.uso <- subset(uso.2, subset=(uso.2$genus == "Lasioglossum"))
+#Cuantas especies?
+nrow(Lasioglossum.uso)/14
+Lasioglossum.uso.dh <- subset(Lasioglossum.uso, Lasioglossum.uso$habitat.extracted=="Developed, High Intensity")
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Developed, High Intensity"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Developed, Medium Intensity"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Developed, Low Intensity"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Developed, Open Space"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Cultivated Crops"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Barren Land"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Coastal"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Deciduous Forest"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Emergent Herbaceuous Wetlands"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Evergreen Forest"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Herbaceuous/Hay/Pasture"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Mixed Forest"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Shrub/Scrub"))
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Woody Wetlands"))
+
+
+66+124
+
+#
+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Developed, High Intensity"))+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Developed, Medium Intensity"))+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Developed, Low Intensity"))+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Developed, Open Space"))+summary(subset(Lasioglossum.uso$d.uso, Lasioglossum.uso$habitat.extracted=="Cultivated Crops"))
+#
+
+Lasioglossum.uso.d <- subset(Lasioglossum.uso, subset=(Lasioglossum.uso$habitat.extracted == "Developed, High Intensity" | Lasioglossum.uso$habitat.extracted == "Developed, Medium Intensity" | Lasioglossum.uso$habitat.extracted == "Developed, Low Intensity" | Lasioglossum.uso$habitat.extracted == "Developed, Open Space" | Lasioglossum.uso$habitat.extracted == "Cultivated Crops"))
+Lasioglossum.uso.n <- subset(Lasioglossum.uso, subset=(!Lasioglossum.uso$habitat.extracted == "Developed, High Intensity" & !Lasioglossum.uso$habitat.extracted == "Developed, Medium Intensity" & !Lasioglossum.uso$habitat.extracted == "Developed, Low Intensity" & !Lasioglossum.uso$habitat.extracted == "Developed, Open Space" & !Lasioglossum.uso$habitat.extracted == "Cultivated Crops"))
+
+summary(Lasioglossum.uso.d$d.uso)
+
+summary(uso.2$genus)
+#Genero nomada
+Nomada.uso <- subset(uso.2, subset=(uso.2$genus == "Nomada"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Developed, High Intensity"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Developed, Medium Intensity"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Developed, Low Intensity"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Developed, Open Space"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Cultivated Crops"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Developed, High Intensity"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Developed, Medium Intensity"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Developed, Low Intensity"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Developed, Open Space"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Cultivated Crops"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Barren Land"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Coastal"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Deciduous Forest"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Emergent Herbaceuous Wetlands"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Evergreen Forest"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Herbaceuous/Hay/Pasture"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Mixed Forest"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Shrub/Scrub"))
+summary(subset(Nomada.uso$d.uso, Nomada.uso$habitat.extracted=="Woody Wetlands"))
+
+
+Osmia.uso <- subset(uso.2, subset=(uso.2$genus == "Osmia"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Developed, High Intensity"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Developed, Medium Intensity"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Developed, Low Intensity"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Developed, Open Space"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Cultivated Crops"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Developed, High Intensity"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Developed, Medium Intensity"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Developed, Low Intensity"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Developed, Open Space"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Cultivated Crops"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Barren Land"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Coastal"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Deciduous Forest"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Emergent Herbaceuous Wetlands"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Evergreen Forest"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Herbaceuous/Hay/Pasture"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Mixed Forest"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Shrub/Scrub"))
+summary(subset(Osmia.uso$d.uso, Osmia.uso$habitat.extracted=="Woody Wetlands"))
+
+#Relación lineal de USO con porcentaje de cobertura
+uso.habitat <- USO[,2]
+uso.habitat <- as.data.frame(uso.habitat)
+cobertura<-c(0.34,6.98,14.46,29.25,0.52,2.91,1.27,5.97,1.00,8.49,14.23,3.34,3.82,6.41)
+uso.habitat <- cbind(uso.habitat,cobertura)
+plot(uso.habitat$uso.habitat,uso.habitat$cobertura)
+text(uso.habitat$uso.habitat,uso.habitat$cobertura, labels = row.names(uso.habitat), cex=0.7, pos=3)
+
+#Lista de USO por especie
+
+#
+matriz.uso <- data.frame()
+jiji <-aggregate (Datos6$habitat.extracted ~ Datos6$gen_sp, FUN = summary, Datos6)
+matriz.uso<-as.data.frame(jiji[[1]])
+row.names(matriz.uso)<-matriz.uso$`jiji[[1]]`
+matriz.uso.2 <- matriz.uso
+#aa<- rep(x = NA,nrow(matriz.uso))
+#matriz.uso<-cbind(matriz.uso,aa)
+
+#
+
+
+
+
+
+
+
+
+
+
+
+for (n in 1:100){
+  
+  tri1<-subset(Datos6, subset=(Datos6$habitat.extracted == "Barren Land"))
+  tri1<-tri1[sample((nrow(tri1)), 134), ]
+  tri2<-subset(Datos6, subset=(Datos6$habitat.extracted == "Cultivated Crops"))
+  tri2<-tri2[sample((nrow(tri2)), 114), ]
+  tri3<-subset(Datos6, subset=(Datos6$habitat.extracted == "Deciduous Forest"))
+  tri3<-tri3[sample((nrow(tri3)), 146), ]
+  tri4<-subset(Datos6, subset=(Datos6$habitat.extracted == "Developed, High Intensity"))
+  tri4<-tri4[sample((nrow(tri4)), 91), ]
+  tri5<-subset(Datos6, subset=(Datos6$habitat.extracted == "Developed, Low Intensity"))
+  tri5<-tri5[sample((nrow(tri5)), 131), ]
+  tri6<-subset(Datos6, subset=(Datos6$habitat.extracted == "Developed, Medium Intensity"))
+  tri6<-tri6[sample((nrow(tri6)), 105), ]
+  tri7<-subset(Datos6, subset=(Datos6$habitat.extracted == "Developed, Open Space"))
+  tri7<-tri7[sample((nrow(tri7)), 124), ]
+  tri8<-subset(Datos6, subset=(Datos6$habitat.extracted == "Emergent Herbaceuous Wetlands"))
+  tri8<-tri8[sample((nrow(tri8)), 154), ]
+  tri9<-subset(Datos6, subset=(Datos6$habitat.extracted == "Evergreen Forest"))
+  tri9<-tri9[sample((nrow(tri9)), 171), ]
+  tri11<-subset(Datos6, subset=(Datos6$habitat.extracted == "Herbaceuous/Hay/Pasture"))
+  tri11<-tri11[sample((nrow(tri11)), 122), ]
+  tri12<-subset(Datos6, subset=(Datos6$habitat.extracted == "Mixed Forest"))
+  tri12<-tri12[sample((nrow(tri12)), 145), ]
+  tri13<-subset(Datos6, subset=(Datos6$habitat.extracted == "Coastal"))
+  tri13<-tri13[sample((nrow(tri13)), 164), ]
+  tri14<-subset(Datos6, subset=(Datos6$habitat.extracted == "Shrub/Scrub"))
+  tri14<-tri14[sample((nrow(tri14)), 143), ]
+  tri15<-subset(Datos6, subset=(Datos6$habitat.extracted == "Woody Wetlands"))
+  tri15<-tri15[sample((nrow(tri15)), 146), ]
+  Datos7<-(rbind(tri1,tri2,tri3,tri4,tri5,tri6,tri7,tri8,tri9,tri11,tri12,tri13,tri14,tri15))
+  #Creamos matriz de interacciones
+  jiji <-aggregate (Datos7$habitat.extracted ~ Datos7$gen_sp, FUN = summary, Datos7)
+  juju<-c(jiji)
+  juju
+  habpref<-as.data.frame(juju)
+  meji<-habpref
+  meji
+  #Transformamos la abundancia en presencia o ausencia, 
+  mejib<-replace(meji, meji>1,1)
+  row.names(mejib)<- meji[,1]
+  row.names(meji)<- meji[,1]
+  nombremes<-meji[,1]
+  View(meji)
+  mejib<-mejib[,-1]
+  meji<-meji[,-1]
+  momo<-apply(mejib, MARGIN=2, FUN=as.numeric)
+  mimi<-apply(meji, MARGIN=2, FUN=as.numeric)
+  row.names(momo)<- nombremes
+  row.names(mimi)<- nombremes
+  View(momo)
+  momo<-momo[,-11]
+  mimi <- mimi[,-11]
+  rowSums(momo)
+  rowSums(mimi)
+  
+  a1<-rowSums(momo)
+  a1<-as.data.frame(a1)
+  a2 <- rowSums(mimi)
+  a2 <- as.data.frame(a2)
+  rownames(a1)
+  matriz.uso <- merge(matriz.uso,a1, by="row.names",all=TRUE)
+  rownames(matriz.uso)<-matriz.uso$Row.names
+  matriz.uso<-matriz.uso[,-1]
+  
+  matriz.uso.2 <- merge(matriz.uso.2,a2, by="row.names",all=TRUE)
+  rownames(matriz.uso.2)<-matriz.uso.2$Row.names
+  matriz.uso.2 <- matriz.uso.2[,-1]
+  
+  }
+matriz.uso <- matriz.uso[,-1]
+matriz.uso.2 <- matriz.uso.2[,-1]
+
+View(matriz.uso)
+View(matriz.uso.2)
+
+names(matriz.uso)
+names(matriz.uso.2)
+
+
+matriz.uso[is.na(matriz.uso)] <-  0
+matriz.uso.2[is.na(matriz.uso.2)] <-  0
+
+
+USO.ESPECIES<-rowSums(matriz.uso)/100
+USO.ESPECIES<-as.data.frame(USO.ESPECIES)
+USO.ESPECIES<-cbind(USO.ESPECIES,(rowSums(matriz.uso.2)/100))
+names(USO.ESPECIES) <- c("n de habitats","Abundancia")
+View(USO.ESPECIES)
+nrow(USO.ESPECIES)
+
+View(dependencias)
+
+q<-summary(Datos6$gen_sp, maxsum= 500)
+q[["Panurginus atramontensis"]]
+q[["Nomada subrutila"]]
+q[["Nomada gracilis"]]
+q[["Nomada dentariae"]]
+q[["Melissodes boltoniae/fumosa"]]
+q[["Megachile latimanus"]]
+q[["Megachile inermis"]]
+q[["Lasioglossum forbesii"]]
+q[["Lasioglossum acuminatum"]]
+q[["Bombus citrinus"]]
+q[["Andrena simplex"]]
+q[["Andrena robertsonii"]]
+q[["Andrena bradleyi"]]
+
+#Agrupamos para repetir preferencias----
+nrow(Datos6)
+habitat.grouped <- Datos6$habitat.extracted
+Datos.g <- cbind(Datos6,habitat.grouped)
+Datos.g <- replace(Datos.g, Datos.g$habitat.grouped == "Developed, High Intensity", "Urban")
+#Nombramos los nuevos grupos
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Developed, High Intensity"]<-"Urban"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Developed, Medium Intensity"]<-"Urban"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Cultivated Crops"]<-"Semiurban"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Herbaceuous/Hay/Pasture"]<-"Semiurban"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Developed, Low Intensity"]<-"Semiurban"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Developed, Open Space"]<-"Semiurban"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Deciduous Forest"]<-"Forest"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Evergreen Forest"]<-"Forest"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Mixed Forest"]<-"Forest"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Coastal"]<-"Other/Natural"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Barren Land"]<-"Other/Natural"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Emergent Herbaceuous Wetlands"]<-"Other/Natural"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Woody Wetlands"]<-"Other/Natural"
+levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Shrub/Scrub"]<-"Other/Natural"
+summary(Datos.g$habitat.grouped)
+#Extracción de matriz de interacciones y filtrado para solo usar especies con más
+#de 100 individuos en nuestro muestreo
+summary(Datos.g2$gen_sp, maxsum=500)
+jiji <-aggregate (Datos.g2$habitat.grouped ~ Datos.g2$gen_sp, FUN = summary, Datos.g2)
+juju<-c(jiji)
+juju
+habpref<-as.data.frame(juju)
+row.names(habpref)<-habpref$Datos.g2.gen_sp
+meji<-habpref[,-1]
+meji <- meji[,-5]
+momo<-apply(meji, MARGIN=2, FUN=as.numeric)
+row.names(momo)<- habpref[,1]
+momomo<-as.data.frame(momo)
+View(momomo)
+#Filtramos para que solo aparezcan las especies que solo tienen >100 observaciones
+
+summmm<-rowSums(momomo)
+momomosb<-cbind(momomo,summmm)
+momomost<-subset(momomosb, subset=momomosb$summmm>100)
+names(momomost)
+observeds<-momomost[,1:4]
+rownames(observeds)
+names(observeds)
+
+library(bipartite)
+#Con este comando extraemos 1000 matrices de interacción de esperados
+nmodels<-nullmodel(observeds, N=1000, method="r2dtable")
+
+#sacamos para Other.Natural solamente pero para cada especie el percentil 0.05 y el
+#0.95
+##Vamos a crear una matriz con los los cuartiles .05 y otra con los cuartiles .95
+#Empezamos por Other.Natural, y seguimos para el resto de habitats
+names(observeds)
+menor=NULL
+mayor=NULL
+med=NULL
+AsericeusBL=NULL
+
+for(k in 1:(nrow(observeds))){
+  for(n in 1:1000){
+    (nmodels[[n]])[k,1]
+    AsericeusBL[n]=(nmodels[[n]])[k,1]
+  }
+  AsericeusBL
+  menor[k]=quantile(AsericeusBL, c(.05))
+  mayor[k]=quantile(AsericeusBL, c(.95))
+  med[k]=quantile(AsericeusBL, c(.50))
+}
+ONmenor<-menor
+ONmayor<-mayor
+ONmed<-med
+ONmed<-as.data.frame(ONmed)
+ONmenor<-as.data.frame(ONmenor)
+ONmayor<-as.data.frame(ONmayor)
+rownames(ONmenor)<-rownames(observeds)
+rownames(ONmayor)<-rownames(observeds)
+rownames(ONmed)<-rownames(observeds)
+ONmenor
+ONmed
+ONmayor
+
+
+#Las sacamos para Coastal y para el resto de habitats
+menor=NULL
+mayor=NULL
+med=NULL
+AsericeusBL=NULL
+
+
+for(k in 1:(nrow(observeds))){
+  for(n in 1:1000){
+    (nmodels[[n]])[k,2]
+    AsericeusBL[n]=(nmodels[[n]])[k,2]
+  }
+  AsericeusBL
+  menor[k]=quantile(AsericeusBL, c(.05))
+  mayor[k]=quantile(AsericeusBL, c(.95))
+  med[k]=quantile(AsericeusBL, c(.50))
+}
+PCmenor<-menor
+PCmayor<-mayor
+PCmed<-med
+PCmed<-as.data.frame(PCmed)
+PCmenor<-as.data.frame(PCmenor)
+PCmayor<-as.data.frame(PCmayor)
+rownames(PCmenor)<-rownames(observeds)
+rownames(PCmayor)<-rownames(observeds)
+rownames(PCmed)<-rownames(observeds)
+PCmenor
+PCmed
+PCmayor
+menor=NULL
+mayor=NULL
+med=NULL
+AsericeusBL=NULL
+
+for(k in 1:(nrow(observeds))){
+  for(n in 1:1000){
+    (nmodels[[n]])[k,3]
+    AsericeusBL[n]=(nmodels[[n]])[k,3]
+  }
+  AsericeusBL
+  menor[k]=quantile(AsericeusBL, c(.05))
+  mayor[k]=quantile(AsericeusBL, c(.95))
+  med[k]=quantile(AsericeusBL, c(.50))
+}
+FOmenor<-menor
+FOmayor<-mayor
+FOmed<-med
+FOmed<-as.data.frame(FOmed)
+FOmenor<-as.data.frame(FOmenor)
+FOmayor<-as.data.frame(FOmayor)
+rownames(FOmenor)<-rownames(observeds)
+rownames(FOmayor)<-rownames(observeds)
+rownames(FOmed)<-rownames(observeds)
+FOmenor
+FOmayor
+FOmed
+
+menor=NULL
+mayor=NULL
+med=NULL
+AsericeusBL=NULL
+
+for(k in 1:(nrow(observeds))){
+  for(n in 1:1000){
+    (nmodels[[n]])[k,4]
+    AsericeusBL[n]=(nmodels[[n]])[k,4]
+  }
+  AsericeusBL
+  menor[k]=quantile(AsericeusBL, c(.05))
+  mayor[k]=quantile(AsericeusBL, c(.95))
+  med[k]=quantile(AsericeusBL, c(.50))
+}
+URmenor<-menor
+URmayor<-mayor
+URmed<-med
+URmed<-as.data.frame(URmed)
+URmenor<-as.data.frame(URmenor)
+URmayor<-as.data.frame(URmayor)
+rownames(URmenor)<-rownames(observeds)
+rownames(URmayor)<-rownames(observeds)
+rownames(URmed)<-rownames(observeds)
+URmenor
+URmayor
+URmed
+
+
+
+menor<-cbind(ONmenor,PCmenor,FOmenor,URmenor)
+menor<-as.data.frame(menor)
+mayor<-cbind(ONmayor,PCmayor,FOmayor,URmayor)
+mayor<-as.data.frame(mayor)
+med<-cbind(ONmed,PCmed,FOmed,URmed)
+med<-as.data.frame(med)
+#Los que tengan valores negativos o el 0 serán avoiders, porque significa que tendrán
+#una abundancia menor al valor del cuantil .05 de la distribución de valores esperados
+colnames(observeds)
+avoiders<-(observeds-menor)
+colnames(avoiders)
+names(avoiders)<-c("Other.Natural", "Pasture.Crops", "Forest" ,"Urban")
+names(observeds)<-c("Other.Natural", "Pasture.Crops", "Forest" ,"Urban")
+avoiders.g2 <- avoiders
+#Los que tengan valores negativos o el 0 serán exploiters
+exploiters<-(mayor-observeds)
+names(exploiters) <- c("Other.Natural", "Pasture.Crops", "Forest" ,"Urban")
+exploiters.g2 <- exploiters
+
+
+
+nrow(subset(exploiters.g, subset = (exploiters.g[,1]<0.1)))
+nrow(subset(exploiters.g, subset = (exploiters.g[,2]<0.1)))
+nrow(subset(exploiters.g, subset = (exploiters.g[,3]<0.1)))
+nrow(subset(exploiters.g, subset = (exploiters.g[,4]<0.1)))
+
+#Creamos data frame con el número de exploiters y avoiders de cada grupo de habitats
+
+PREFERENCE.g2 <- c(nrow(subset(exploiters.g2, subset = (exploiters.g2[,1]<0.1))),nrow(subset(exploiters.g2, subset = (exploiters.g2[,2]<0.1))),nrow(subset(exploiters.g2, subset = (exploiters.g2[,3]<0.1))),nrow(subset(exploiters.g2, subset = (exploiters.g2[,4]<0.1))))
+PREFERENCE.g2 <- as.data.frame(PREFERENCE.g2)
+row.names(PREFERENCE.g2) <-c("Other.Natural", "Pasture.Crops", "Forest" ,"Urban") 
+avoidance.g2 <- c(nrow(subset(avoiders.g2, subset = (avoiders.g2[,1]<0.1))),nrow(subset(avoiders.g2, subset = (avoiders.g2[,2]<0.1))),nrow(subset(avoiders.g2, subset = (avoiders.g2[,3]<0.1))),nrow(subset(avoiders.g2, subset = (avoiders.g2[,4]<0.1))))
+PREFERENCE.g2 <- cbind(PREFERENCE.g2,avoidance.g2)
+nrow(exploiters.g2)
+names(PREFERENCE.g2)<-c("Exploiters","Avoiders")
+
+indiferencia.g2 <- nrow(exploiters.g2)-(PREFERENCE.g2$Exploiters+PREFERENCE.g2$Avoiders)
+PREFERENCE.g2 <- cbind(PREFERENCE.g2,indiferencia.g2)
+names(PREFERENCE.g2)<-c("Exploiters","Avoiders","Indifferent")
+PREFERENCE.g2
+
+#Lista de usuarios y evitadores de los habitat grupo
+row.names(subset(exploiters.g2, subset = (exploiters.g2[,1]<0.1)))
+row.names(subset(exploiters.g2, subset = (exploiters.g2[,2]<0.1)))
+row.names(subset(exploiters.g2, subset = (exploiters.g2[,3]<0.1)))
+row.names(subset(exploiters.g2, subset = (exploiters.g2[,4]<0.1)))
+
+row.names(subset(avoiders.g2, subset = (avoiders.g2[,1]<0.1)))
+row.names(subset(avoiders.g2, subset = (avoiders.g2[,2]<0.1)))
+row.names(subset(avoiders.g2, subset = (avoiders.g2[,3]<0.1)))
+row.names(subset(avoiders.g2, subset = (avoiders.g2[,4]<0.1)))
+
+
+USO
+PREFERENCE
+PREFERENCE.g
+
+#Agrupamos.2----- 
+#de una forma diferente, separando los pastures y crops en un solo grupo
+#incluimos developed low y open como urban
+nrow(Datos6)
+habitat.grouped.2 <- Datos6$habitat.extracted
+Datos.g2 <- cbind(Datos6,habitat.grouped)
+Datos.g2 <- replace(Datos.g2, Datos.g$habitat.grouped == "Developed, High Intensity", "Urban")
+#Nombramos los nuevos grupos
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Developed, High Intensity"]<-"Urban"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Developed, Medium Intensity"]<-"Urban"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Cultivated Crops"]<-"Pasture and Crops"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Herbaceuous/Hay/Pasture"]<-"Pasture and Crops"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Developed, Low Intensity"]<-"Urban"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Developed, Open Space"]<-"Urban"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Deciduous Forest"]<-"Forest"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Evergreen Forest"]<-"Forest"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Mixed Forest"]<-"Forest"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Coastal"]<-"Other/Natural"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Barren Land"]<-"Other/Natural"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Emergent Herbaceuous Wetlands"]<-"Other/Natural"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Woody Wetlands"]<-"Other/Natural"
+levels(Datos.g2$habitat.grouped)[levels(Datos.g2$habitat.grouped)=="Shrub/Scrub"]<-"Other/Natural"
+summary(Datos.g2$habitat.grouped)
+a
+
+#USO tomando 100 muestras de cada especies----
+##
+a
+u1<-subset(Datos6, subset=(Datos6$gen_sp == names(a[1])))
+u1<-u1[sample((nrow(u1)), 100), ]
+summary(u1$habitat.extracted)
+u2<-subset(Datos6, subset=(Datos6$gen_sp == names(a[2])))
+u2<-u2[sample((nrow(u2)), 100), ]
+u3<-subset(Datos6, subset=(Datos6$gen_sp == names(a[3])))
+u3<-u3[sample((nrow(u3)), 100), ]
+u4<-subset(Datos6, subset=(Datos6$gen_sp == names(a[4])))
+u4<-u4[sample((nrow(u4)), 100), ]
+u5<-subset(Datos6, subset=(Datos6$gen_sp == names(a[5])))
+u5<-u5[sample((nrow(u5)), 100), ]
+u6<-subset(Datos6, subset=(Datos6$gen_sp == names(a[6])))
+u6<-u6[sample((nrow(u6)), 100), ]
+u7<-subset(Datos6, subset=(Datos6$gen_sp == names(a[7])))
+u7<-u7[sample((nrow(u7)), 100), ]
+u8<-subset(Datos6, subset=(Datos6$gen_sp == names(a[8])))
+u8<-u8[sample((nrow(u8)), 100), ]
+u9<-subset(Datos6, subset=(Datos6$gen_sp == names(a[9])))
+u9<-u9[sample((nrow(u9)), 100), ]
+u10<-subset(Datos6, subset=(Datos6$gen_sp == names(a[10])))
+u10<-u10[sample((nrow(u10)), 100), ]
+u11<-subset(Datos6, subset=(Datos6$gen_sp == names(a[11])))
+u11<-u11[sample((nrow(u11)), 100), ]
+u12<-subset(Datos6, subset=(Datos6$gen_sp == names(a[12])))
+u12<-u12[sample((nrow(u12)), 100), ]
+u13<-subset(Datos6, subset=(Datos6$gen_sp == names(a[13])))
+u13<-u13[sample((nrow(u13)), 100), ]
+u14<-subset(Datos6, subset=(Datos6$gen_sp == names(a[14])))
+u14<-u14[sample((nrow(u14)), 100), ]
+u15<-subset(Datos6, subset=(Datos6$gen_sp == names(a[15])))
+u15<-u15[sample((nrow(u15)), 100), ]
+u16<-subset(Datos6, subset=(Datos6$gen_sp == names(a[16])))
+u16<-u16[sample((nrow(u16)), 100), ]
+u17<-subset(Datos6, subset=(Datos6$gen_sp == names(a[17])))
+u17<-u17[sample((nrow(u17)), 100), ]
+u18<-subset(Datos6, subset=(Datos6$gen_sp == names(a[18])))
+u18<-u18[sample((nrow(u18)), 100), ]
+u19<-subset(Datos6, subset=(Datos6$gen_sp == names(a[19])))
+u19<-u19[sample((nrow(u19)), 100), ]
+u20<-subset(Datos6, subset=(Datos6$gen_sp == names(a[20])))
+u20<-u20[sample((nrow(u20)), 100), ]
+u21<-subset(Datos6, subset=(Datos6$gen_sp == names(a[21])))
+u21<-u21[sample((nrow(u21)), 100), ]
+u22<-subset(Datos6, subset=(Datos6$gen_sp == names(a[22])))
+u22<-u22[sample((nrow(u22)), 100), ]
+u23<-subset(Datos6, subset=(Datos6$gen_sp == names(a[23])))
+u23<-u23[sample((nrow(u23)), 100), ]
+u24<-subset(Datos6, subset=(Datos6$gen_sp == names(a[24])))
+u24<-u24[sample((nrow(u24)), 100), ]
+u25<-subset(Datos6, subset=(Datos6$gen_sp == names(a[25])))
+u25<-u25[sample((nrow(u25)), 100), ]
+u26<-subset(Datos6, subset=(Datos6$gen_sp == names(a[26])))
+u26<-u26[sample((nrow(u26)), 100), ]
+u27<-subset(Datos6, subset=(Datos6$gen_sp == names(a[27])))
+u27<-u27[sample((nrow(u27)), 100), ]
+u28<-subset(Datos6, subset=(Datos6$gen_sp == names(a[28])))
+u28<-u28[sample((nrow(u28)), 100), ]
+u29<-subset(Datos6, subset=(Datos6$gen_sp == names(a[29])))
+u29<-u29[sample((nrow(u29)), 100), ]
+u30<-subset(Datos6, subset=(Datos6$gen_sp == names(a[30])))
+u30<-u30[sample((nrow(u30)), 100), ]
+u31<-subset(Datos6, subset=(Datos6$gen_sp == names(a[31])))
+u31<-u31[sample((nrow(u31)), 100), ]
+u32<-subset(Datos6, subset=(Datos6$gen_sp == names(a[32])))
+u32<-u32[sample((nrow(u32)), 100), ]
+u33<-subset(Datos6, subset=(Datos6$gen_sp == names(a[33])))
+u33<-u33[sample((nrow(u33)), 100), ]
+u34<-subset(Datos6, subset=(Datos6$gen_sp == names(a[34])))
+u34<-u34[sample((nrow(u34)), 100), ]
+u35<-subset(Datos6, subset=(Datos6$gen_sp == names(a[35])))
+u35<-u35[sample((nrow(u35)), 100), ]
+u36<-subset(Datos6, subset=(Datos6$gen_sp == names(a[36])))
+u36<-u36[sample((nrow(u36)), 100), ]
+u37<-subset(Datos6, subset=(Datos6$gen_sp == names(a[37])))
+u37<-u37[sample((nrow(u37)), 100), ]
+u38<-subset(Datos6, subset=(Datos6$gen_sp == names(a[38])))
+u38<-u38[sample((nrow(u38)), 100), ]
+u39<-subset(Datos6, subset=(Datos6$gen_sp == names(a[39])))
+u39<-u39[sample((nrow(u39)), 100), ]
+u40<-subset(Datos6, subset=(Datos6$gen_sp == names(a[40])))
+u40<-u40[sample((nrow(u40)), 100), ]
+u41<-subset(Datos6, subset=(Datos6$gen_sp == names(a[41])))
+u41<-u41[sample((nrow(u41)), 100), ]
+u42<-subset(Datos6, subset=(Datos6$gen_sp == names(a[42])))
+u42<-u42[sample((nrow(u42)), 100), ]
+u43<-subset(Datos6, subset=(Datos6$gen_sp == names(a[43])))
+u43<-u43[sample((nrow(u43)), 100), ]
+u45<-subset(Datos6, subset=(Datos6$gen_sp == names(a[45])))
+u45<-u45[sample((nrow(u45)), 100), ]
+u46<-subset(Datos6, subset=(Datos6$gen_sp == names(a[46])))
+u46<-u46[sample((nrow(u46)), 100), ]
+
+Datos.uso <- rbind(u1,u2,u3,u4,u5,u6,u7,u8,u9,u10,u11,u12,u13,u14,u15,u16,u17,u18,u19,u20,u21,u22,u23,u24,u25,u26,u27,u28,u29,u30,u31,u32,u33,u34,u35,u36,u37,u38,u39,u40,u41,u42,u43,u45,u46)
+
+#Sacamos matriz de interacción, en forma de lista, con todas las abundancias de cada
+#especie en cada habitat
+int<-tapply(Datos.uso$habitat.extracted, Datos.uso$gen_sp, FUN = summary)
+#Deslistamos en un vector más fácil para operar
+int.u<- unlist(int)
+int.u
+length(int.u)
+length(d)
+#Sustituimos abundancia por presencia/ausencia
+int.u<-replace(int.u, int.u>1,1)
+row.names(d)
+int.u <- as.data.frame(int.u)
+row.names(int.u)
+View(int.u)
+de<-int.u
+##
+###Hacemos un loop para rareficar, tomando muestras igualando el muestreo de cada especie
+
+a <- (summary(Datos6$gen_sp))
+for (n in 1:99) {
+
+  u1<-subset(Datos6, subset=(Datos6$gen_sp == names(a[1])))
+  u1<-u1[sample((nrow(u1)), 100), ]
+  summary(u1$habitat.extracted)
+  u2<-subset(Datos6, subset=(Datos6$gen_sp == names(a[2])))
+  u2<-u2[sample((nrow(u2)), 100), ]
+  u3<-subset(Datos6, subset=(Datos6$gen_sp == names(a[3])))
+  u3<-u3[sample((nrow(u3)), 100), ]
+  u4<-subset(Datos6, subset=(Datos6$gen_sp == names(a[4])))
+  u4<-u4[sample((nrow(u4)), 100), ]
+  u5<-subset(Datos6, subset=(Datos6$gen_sp == names(a[5])))
+  u5<-u5[sample((nrow(u5)), 100), ]
+  u6<-subset(Datos6, subset=(Datos6$gen_sp == names(a[6])))
+  u6<-u6[sample((nrow(u6)), 100), ]
+  u7<-subset(Datos6, subset=(Datos6$gen_sp == names(a[7])))
+  u7<-u7[sample((nrow(u7)), 100), ]
+  u8<-subset(Datos6, subset=(Datos6$gen_sp == names(a[8])))
+  u8<-u8[sample((nrow(u8)), 100), ]
+  u9<-subset(Datos6, subset=(Datos6$gen_sp == names(a[9])))
+  u9<-u9[sample((nrow(u9)), 100), ]
+  u10<-subset(Datos6, subset=(Datos6$gen_sp == names(a[10])))
+  u10<-u10[sample((nrow(u10)), 100), ]
+  u11<-subset(Datos6, subset=(Datos6$gen_sp == names(a[11])))
+  u11<-u11[sample((nrow(u11)), 100), ]
+  u12<-subset(Datos6, subset=(Datos6$gen_sp == names(a[12])))
+  u12<-u12[sample((nrow(u12)), 100), ]
+  u13<-subset(Datos6, subset=(Datos6$gen_sp == names(a[13])))
+  u13<-u13[sample((nrow(u13)), 100), ]
+  u14<-subset(Datos6, subset=(Datos6$gen_sp == names(a[14])))
+  u14<-u14[sample((nrow(u14)), 100), ]
+  u15<-subset(Datos6, subset=(Datos6$gen_sp == names(a[15])))
+  u15<-u15[sample((nrow(u15)), 100), ]
+  u16<-subset(Datos6, subset=(Datos6$gen_sp == names(a[16])))
+  u16<-u16[sample((nrow(u16)), 100), ]
+  u17<-subset(Datos6, subset=(Datos6$gen_sp == names(a[17])))
+  u17<-u17[sample((nrow(u17)), 100), ]
+  u18<-subset(Datos6, subset=(Datos6$gen_sp == names(a[18])))
+  u18<-u18[sample((nrow(u18)), 100), ]
+  u19<-subset(Datos6, subset=(Datos6$gen_sp == names(a[19])))
+  u19<-u19[sample((nrow(u19)), 100), ]
+  u20<-subset(Datos6, subset=(Datos6$gen_sp == names(a[20])))
+  u20<-u20[sample((nrow(u20)), 100), ]
+  u21<-subset(Datos6, subset=(Datos6$gen_sp == names(a[21])))
+  u21<-u21[sample((nrow(u21)), 100), ]
+  u22<-subset(Datos6, subset=(Datos6$gen_sp == names(a[22])))
+  u22<-u22[sample((nrow(u22)), 100), ]
+  u23<-subset(Datos6, subset=(Datos6$gen_sp == names(a[23])))
+  u23<-u23[sample((nrow(u23)), 100), ]
+  u24<-subset(Datos6, subset=(Datos6$gen_sp == names(a[24])))
+  u24<-u24[sample((nrow(u24)), 100), ]
+  u25<-subset(Datos6, subset=(Datos6$gen_sp == names(a[25])))
+  u25<-u25[sample((nrow(u25)), 100), ]
+  u26<-subset(Datos6, subset=(Datos6$gen_sp == names(a[26])))
+  u26<-u26[sample((nrow(u26)), 100), ]
+  u27<-subset(Datos6, subset=(Datos6$gen_sp == names(a[27])))
+  u27<-u27[sample((nrow(u27)), 100), ]
+  u28<-subset(Datos6, subset=(Datos6$gen_sp == names(a[28])))
+  u28<-u28[sample((nrow(u28)), 100), ]
+  u29<-subset(Datos6, subset=(Datos6$gen_sp == names(a[29])))
+  u29<-u29[sample((nrow(u29)), 100), ]
+  u30<-subset(Datos6, subset=(Datos6$gen_sp == names(a[30])))
+  u30<-u30[sample((nrow(u30)), 100), ]
+  u31<-subset(Datos6, subset=(Datos6$gen_sp == names(a[31])))
+  u31<-u31[sample((nrow(u31)), 100), ]
+  u32<-subset(Datos6, subset=(Datos6$gen_sp == names(a[32])))
+  u32<-u32[sample((nrow(u32)), 100), ]
+  u33<-subset(Datos6, subset=(Datos6$gen_sp == names(a[33])))
+  u33<-u33[sample((nrow(u33)), 100), ]
+  u34<-subset(Datos6, subset=(Datos6$gen_sp == names(a[34])))
+  u34<-u34[sample((nrow(u34)), 100), ]
+  u35<-subset(Datos6, subset=(Datos6$gen_sp == names(a[35])))
+  u35<-u35[sample((nrow(u35)), 100), ]
+  u36<-subset(Datos6, subset=(Datos6$gen_sp == names(a[36])))
+  u36<-u36[sample((nrow(u36)), 100), ]
+  u37<-subset(Datos6, subset=(Datos6$gen_sp == names(a[37])))
+  u37<-u37[sample((nrow(u37)), 100), ]
+  u38<-subset(Datos6, subset=(Datos6$gen_sp == names(a[38])))
+  u38<-u38[sample((nrow(u38)), 100), ]
+  u39<-subset(Datos6, subset=(Datos6$gen_sp == names(a[39])))
+  u39<-u39[sample((nrow(u39)), 100), ]
+  u40<-subset(Datos6, subset=(Datos6$gen_sp == names(a[40])))
+  u40<-u40[sample((nrow(u40)), 100), ]
+  u41<-subset(Datos6, subset=(Datos6$gen_sp == names(a[41])))
+  u41<-u41[sample((nrow(u41)), 100), ]
+  u42<-subset(Datos6, subset=(Datos6$gen_sp == names(a[42])))
+  u42<-u42[sample((nrow(u42)), 100), ]
+  u43<-subset(Datos6, subset=(Datos6$gen_sp == names(a[43])))
+  u43<-u43[sample((nrow(u43)), 100), ]
+  u45<-subset(Datos6, subset=(Datos6$gen_sp == names(a[45])))
+  u45<-u45[sample((nrow(u45)), 100), ]
+  u46<-subset(Datos6, subset=(Datos6$gen_sp == names(a[46])))
+  u46<-u46[sample((nrow(u46)), 100), ]
+  Datos.uso <- rbind(u1,u2,u3,u4,u5,u6,u7,u8,u9,u10,u11,u12,u13,u14,u15,u16,u17,u18,u19,u20,u21,u22,u23,u24,u25,u26,u27,u28,u29,u30,u31,u32,u33,u34,u35,u36,u37,u38,u39,u40,u41,u42,u43,u45,u46)
+  summary(Datos.uso$habitat.extracted)  
+  #Sacamos matriz de interacción, en forma de lista, con todas las abundancias de cada
+  #especie en cada habitat
+  int<-tapply(Datos.uso$habitat.extracted, Datos.uso$gen_sp, FUN = summary)
+  int
+  #Deslistamos en un vector más fácil para operar
+  int.u<- unlist(int)
+  int.u
+  length(int.u)
+  length(d)
+  #Sustituimos abundancia por presencia/ausencia
+  int.u<-replace(int.u, int.u>1,1)
+  row.names(d)
+  int.u <- as.data.frame(int.u)
+  row.names(int.u)
+  #Unimos el vector de presencia/ausencia al data frame, al unir por row.names
+  #nos crea en la unión una colunma nueva, que eliminamos
+  de <- merge(de,int.u, by="row.names",all=TRUE)
+  
+  row.names(de)<-row.names(int.u)
+  de<-de[,-1]
+  }
+View(de)
+#Hacemos una columna con la suma de las 100 repeticiones, si el resultado es mayor a uno
+#hay USO
+de$suma <- rowSums(de) 
+de$uso <- rowSums(de) 
+de$uso <- replace(de$uso, de$uso>0, "YES")
+de$uso <- replace(de$uso, de$uso==0, "NO")
+de$uso.n <- de$suma
+de$uso.n <- replace(de$uso.n, de$uso.n >1,1)
+de$rnames <- row.names(de) 
+#Creamos data frame con los resultados del uso
+uso.p<- data.frame(de$rnames,de$suma,de$uso.n,de$uso)
+row.names(uso.p) <- uso.p[,1]
+espacio <- regexpr(pattern = " ", uso.p$d.rnames)
+
+View(uso.p)
+
+summary(Datos6$gen_sp, maxsum=46)
+View(uso.p)
+uso.p.yesno <- uso.p[,c(1,4)]
+View(uso.p.yesno)
+
+#Rareficando el número de habitats usados-----
+
+#Creamos data frame en blanco con los nombres de las especies
+a<-summary(Datos6$gen_sp)
+
+blanknames <- c("Agapostemon virescens","Andrena carlini","Andrena cressonii","Andrena erigeniae","Andrena nasonii","Andrena perplexa","Andrena violae","Apis mellifera","Augochlora pura","Augochlorella aurata","Bombus bimaculatus","Bombus fervidus","Bombus griseocollis","Calliopsis andreniformis","Ceratina calcarata/dupla/mikmaqi","Ceratina strenua","Halictus confusus","Halictus ligatus/poeyi","Halictus rubicundus","Hylaeus affinis/modestus","Lasioglossum bruneri","Lasioglossum callidum","Lasioglossum coriaceum","Lasioglossum cressonii","Lasioglossum hitchensi","Lasioglossum illinoense","Lasioglossum imitatum","Lasioglossum near_admirandum","Lasioglossum oblongum","Lasioglossum pectorale","Lasioglossum pilosum","Lasioglossum tegulare","Lasioglossum versatum","Megachile brevis","Megachile mendica","Melissodes bimaculata","Nomada bidentate_group","Nomada pygmaea","Osmia atriventris","Osmia bucephala","Osmia georgica","Osmia pumila","Osmia taurus","Ptilothrix bombiformis","Xylocopa virginica")
+blank<-data.frame(row.names = blanknames)
+for (n in 1:100) { 
+#Tomamos una muestra de 100 individuos de cada una de las especies más abundantes  
+u1<-subset(Datos6, subset=(Datos6$gen_sp == names(a[1])))
+u1<-u1[sample((nrow(u1)), 100), ]
+u2<-subset(Datos6, subset=(Datos6$gen_sp == names(a[2])))
+u2<-u2[sample((nrow(u2)), 100), ]
+u3<-subset(Datos6, subset=(Datos6$gen_sp == names(a[3])))
+u3<-u3[sample((nrow(u3)), 100), ]
+u4<-subset(Datos6, subset=(Datos6$gen_sp == names(a[4])))
+u4<-u4[sample((nrow(u4)), 100), ]
+u5<-subset(Datos6, subset=(Datos6$gen_sp == names(a[5])))
+u5<-u5[sample((nrow(u5)), 100), ]
+u6<-subset(Datos6, subset=(Datos6$gen_sp == names(a[6])))
+u6<-u6[sample((nrow(u6)), 100), ]
+u7<-subset(Datos6, subset=(Datos6$gen_sp == names(a[7])))
+u7<-u7[sample((nrow(u7)), 100), ]
+u8<-subset(Datos6, subset=(Datos6$gen_sp == names(a[8])))
+u8<-u8[sample((nrow(u8)), 100), ]
+u9<-subset(Datos6, subset=(Datos6$gen_sp == names(a[9])))
+u9<-u9[sample((nrow(u9)), 100), ]
+u10<-subset(Datos6, subset=(Datos6$gen_sp == names(a[10])))
+u10<-u10[sample((nrow(u10)), 100), ]
+u11<-subset(Datos6, subset=(Datos6$gen_sp == names(a[11])))
+u11<-u11[sample((nrow(u11)), 100), ]
+u12<-subset(Datos6, subset=(Datos6$gen_sp == names(a[12])))
+u12<-u12[sample((nrow(u12)), 100), ]
+u13<-subset(Datos6, subset=(Datos6$gen_sp == names(a[13])))
+u13<-u13[sample((nrow(u13)), 100), ]
+u14<-subset(Datos6, subset=(Datos6$gen_sp == names(a[14])))
+u14<-u14[sample((nrow(u14)), 100), ]
+u15<-subset(Datos6, subset=(Datos6$gen_sp == names(a[15])))
+u15<-u15[sample((nrow(u15)), 100), ]
+u16<-subset(Datos6, subset=(Datos6$gen_sp == names(a[16])))
+u16<-u16[sample((nrow(u16)), 100), ]
+u17<-subset(Datos6, subset=(Datos6$gen_sp == names(a[17])))
+u17<-u17[sample((nrow(u17)), 100), ]
+u18<-subset(Datos6, subset=(Datos6$gen_sp == names(a[18])))
+u18<-u18[sample((nrow(u18)), 100), ]
+u19<-subset(Datos6, subset=(Datos6$gen_sp == names(a[19])))
+u19<-u19[sample((nrow(u19)), 100), ]
+u20<-subset(Datos6, subset=(Datos6$gen_sp == names(a[20])))
+u20<-u20[sample((nrow(u20)), 100), ]
+u21<-subset(Datos6, subset=(Datos6$gen_sp == names(a[21])))
+u21<-u21[sample((nrow(u21)), 100), ]
+u22<-subset(Datos6, subset=(Datos6$gen_sp == names(a[22])))
+u22<-u22[sample((nrow(u22)), 100), ]
+u23<-subset(Datos6, subset=(Datos6$gen_sp == names(a[23])))
+u23<-u23[sample((nrow(u23)), 100), ]
+u24<-subset(Datos6, subset=(Datos6$gen_sp == names(a[24])))
+u24<-u24[sample((nrow(u24)), 100), ]
+u25<-subset(Datos6, subset=(Datos6$gen_sp == names(a[25])))
+u25<-u25[sample((nrow(u25)), 100), ]
+u26<-subset(Datos6, subset=(Datos6$gen_sp == names(a[26])))
+u26<-u26[sample((nrow(u26)), 100), ]
+u27<-subset(Datos6, subset=(Datos6$gen_sp == names(a[27])))
+u27<-u27[sample((nrow(u27)), 100), ]
+u28<-subset(Datos6, subset=(Datos6$gen_sp == names(a[28])))
+u28<-u28[sample((nrow(u28)), 100), ]
+u29<-subset(Datos6, subset=(Datos6$gen_sp == names(a[29])))
+u29<-u29[sample((nrow(u29)), 100), ]
+u30<-subset(Datos6, subset=(Datos6$gen_sp == names(a[30])))
+u30<-u30[sample((nrow(u30)), 100), ]
+u31<-subset(Datos6, subset=(Datos6$gen_sp == names(a[31])))
+u31<-u31[sample((nrow(u31)), 100), ]
+u32<-subset(Datos6, subset=(Datos6$gen_sp == names(a[32])))
+u32<-u32[sample((nrow(u32)), 100), ]
+u33<-subset(Datos6, subset=(Datos6$gen_sp == names(a[33])))
+u33<-u33[sample((nrow(u33)), 100), ]
+u34<-subset(Datos6, subset=(Datos6$gen_sp == names(a[34])))
+u34<-u34[sample((nrow(u34)), 100), ]
+u35<-subset(Datos6, subset=(Datos6$gen_sp == names(a[35])))
+u35<-u35[sample((nrow(u35)), 100), ]
+u36<-subset(Datos6, subset=(Datos6$gen_sp == names(a[36])))
+u36<-u36[sample((nrow(u36)), 100), ]
+u37<-subset(Datos6, subset=(Datos6$gen_sp == names(a[37])))
+u37<-u37[sample((nrow(u37)), 100), ]
+u38<-subset(Datos6, subset=(Datos6$gen_sp == names(a[38])))
+u38<-u38[sample((nrow(u38)), 100), ]
+u39<-subset(Datos6, subset=(Datos6$gen_sp == names(a[39])))
+u39<-u39[sample((nrow(u39)), 100), ]
+u40<-subset(Datos6, subset=(Datos6$gen_sp == names(a[40])))
+u40<-u40[sample((nrow(u40)), 100), ]
+u41<-subset(Datos6, subset=(Datos6$gen_sp == names(a[41])))
+u41<-u41[sample((nrow(u41)), 100), ]
+u42<-subset(Datos6, subset=(Datos6$gen_sp == names(a[42])))
+u42<-u42[sample((nrow(u42)), 100), ]
+u43<-subset(Datos6, subset=(Datos6$gen_sp == names(a[43])))
+u43<-u43[sample((nrow(u43)), 100), ]
+u45<-subset(Datos6, subset=(Datos6$gen_sp == names(a[45])))
+u45<-u45[sample((nrow(u45)), 100), ]
+u46<-subset(Datos6, subset=(Datos6$gen_sp == names(a[46])))
+u46<-u46[sample((nrow(u46)), 100), ]
+#Hacemos dataframe con los muestreos
+Datos.uso.2 <- rbind(u1,u2,u3,u4,u5,u6,u7,u8,u9,u10,u11,u12,u13,u14,u15,u16,u17,u18,u19,u20,u21,u22,u23,u24,u25,u26,u27,u28,u29,u30,u31,u32,u33,u34,u35,u36,u37,u38,u39,u40,u41,u42,u43,u45,u46)
+View(Datos.uso.2)
+jiji <-aggregate (Datos.uso.2$habitat.extracted ~ Datos.uso.2$gen_sp, FUN = summary, Datos.uso.2)
+juju<-c(jiji)
+juju
+habpref<-as.data.frame(juju)
+meji<-habpref
+meji
+#Transformamos la abundancia en presencia o ausencia, 
+row.names(meji)<- meji[,1]
+mejib<-meji[,-c(1,11)]
+mejib<-replace(mejib, mejib>1,1)
+momo<-apply(mejib, MARGIN=2, FUN=as.numeric)
+row.names(momo)<- meji[,1]
+momo<-momo[,-10]
+blank[,n]<-rowSums(momo)
+}
+View(blank)
+#Vector con el número de habitats usado rareficado
+use.rarefied<-rowSums(blank)/100
+use.rarefied
+
+#Cuantiles de las preferencias de habitats------
+lista.bl<-list()
+lista.bl.c<-list()
+lista.co<-list()
+lista.co.c<-list()
+lista.cc<-list()
+lista.cc.c<-list()
+lista.df<-list()
+lista.df.c<-list()
+lista.dh<-list()
+lista.dh.c<-list()
+lista.dl<-list()
+lista.dl.c<-list()
+lista.dm<-list()
+lista.dm.c<-list()
+lista.do<-list()
+lista.do.c<-list()
+lista.eh<-list()
+lista.eh.c<-list()
+lista.ef<-list()
+lista.ef.c<-list()
+lista.hp<-list()
+lista.hp.c<-list()
+lista.hb<-list()
+lista.hb.c<-list()
+lista.mf<-list()
+lista.mf.c<-list()
+lista.ss<-list()
+lista.ss.c<-list()
+lista.ww<-list()
+lista.ww.c<-list()
+uno.uno<-NULL
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,1]
+  }
+  lista.bl.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.bl[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,1])
+  
+}
+
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,2]
+  }
+  lista.co.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.co[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,2])
+  
+}
+
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,3]
+  }
+  lista.cc.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.cc[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,3])
+  
+}
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,4]
+  }
+  lista.df.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.df[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,4])
+  
+}
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,5]
+  }
+  lista.dh.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.dh[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,5])
+  
+}
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,6]
+  }
+  lista.dl.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.dl[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,6])
+  
+}
+
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,7]
+  }
+  lista.dm.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.dm[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,7])
+  
+}
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,8]
+  }
+  lista.do.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.do[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,8])
+  
+}
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,9]
+  }
+  lista.eh.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.eh[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,9])
+  
+}
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,10]
+  }
+  lista.ef.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.ef[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,10])
+  
+}
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,11]
+  }
+  lista.hp.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.hp[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,11])
+  
+}
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,12]
+  }
+  lista.hb.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.hb[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,12])
+  
+}
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,13]
+  }
+  lista.mf.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.mf[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,13])
+  
+}
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,14]
+  }
+  lista.ss.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.ss[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,14])
+  
+}
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels[[n]][k,15]
+  }
+  lista.ww.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.ww[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds[k,15])
+  
+}
+View(observeds)
+lista.bl
+lista.bl.c
+lista.co
+lista.co.c
+lista.cc
+lista.cc.c
+lista.df
+lista.df.c
+lista.dh
+lista.dl
+lista.dm
+lista.dm.c
+lista.do
+lista.do.c
+lista.eh
+lista.eh.c
+lista.ef.c
+lista.ef
+#lista.hp
+lista.hb
+lista.mf
+lista.ss
+lista.ww
+lista.ww.c
+
+##Uso para los habitats agrupados tomando 100 muestras de los individuos más abundantes----
+summary(Datos.g$habitat.grouped)
+
+
+
+
+
+
+b
+d
+
+f<-summary(Datos.g$gen_sp)
+
+blanknames <- c("Agapostemon virescens","Andrena carlini","Andrena cressonii","Andrena erigeniae","Andrena nasonii","Andrena perplexa","Andrena violae","Apis mellifera","Augochlora pura","Augochlorella aurata","Bombus bimaculatus","Bombus fervidus","Bombus griseocollis","Calliopsis andreniformis","Ceratina calcarata/dupla/mikmaqi","Ceratina strenua","Halictus confusus","Halictus ligatus/poeyi","Halictus rubicundus","Hylaeus affinis/modestus","Lasioglossum bruneri","Lasioglossum callidum","Lasioglossum coriaceum","Lasioglossum cressonii","Lasioglossum hitchensi","Lasioglossum illinoense","Lasioglossum imitatum","Lasioglossum near_admirandum","Lasioglossum oblongum","Lasioglossum pectorale","Lasioglossum pilosum","Lasioglossum tegulare","Lasioglossum versatum","Megachile brevis","Megachile mendica","Melissodes bimaculata","Nomada bidentate_group","Nomada pygmaea","Osmia atriventris","Osmia bucephala","Osmia georgica","Osmia pumila","Osmia taurus","Ptilothrix bombiformis","Xylocopa virginica")
+blank.g<-data.frame(row.names = blanknames)
+for (n in 1:100) { 
+  #Tomamos una muestra de 100 individuos de cada una de las especies más abundantes  
+  u1<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[1])))
+  u1<-u1[sample((nrow(u1)), 100), ]
+  u2<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[2])))
+  u2<-u2[sample((nrow(u2)), 100), ]
+  u3<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[3])))
+  u3<-u3[sample((nrow(u3)), 100), ]
+  u4<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[4])))
+  u4<-u4[sample((nrow(u4)), 100), ]
+  u5<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[5])))
+  u5<-u5[sample((nrow(u5)), 100), ]
+  u6<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[6])))
+  u6<-u6[sample((nrow(u6)), 100), ]
+  u7<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[7])))
+  u7<-u7[sample((nrow(u7)), 100), ]
+  u8<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[8])))
+  u8<-u8[sample((nrow(u8)), 100), ]
+  u9<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[9])))
+  u9<-u9[sample((nrow(u9)), 100), ]
+  u10<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[10])))
+  u10<-u10[sample((nrow(u10)), 100), ]
+  u11<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[11])))
+  u11<-u11[sample((nrow(u11)), 100), ]
+  u12<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[12])))
+  u12<-u12[sample((nrow(u12)), 100), ]
+  u13<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[13])))
+  u13<-u13[sample((nrow(u13)), 100), ]
+  u14<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[14])))
+  u14<-u14[sample((nrow(u14)), 100), ]
+  u15<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[15])))
+  u15<-u15[sample((nrow(u15)), 100), ]
+  u16<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[16])))
+  u16<-u16[sample((nrow(u16)), 100), ]
+  u17<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[17])))
+  u17<-u17[sample((nrow(u17)), 100), ]
+  u18<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[18])))
+  u18<-u18[sample((nrow(u18)), 100), ]
+  u19<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[19])))
+  u19<-u19[sample((nrow(u19)), 100), ]
+  u20<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[20])))
+  u20<-u20[sample((nrow(u20)), 100), ]
+  u21<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[21])))
+  u21<-u21[sample((nrow(u21)), 100), ]
+  u22<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[22])))
+  u22<-u22[sample((nrow(u22)), 100), ]
+  u23<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[23])))
+  u23<-u23[sample((nrow(u23)), 100), ]
+  u24<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[24])))
+  u24<-u24[sample((nrow(u24)), 100), ]
+  u25<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[25])))
+  u25<-u25[sample((nrow(u25)), 100), ]
+  u26<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[26])))
+  u26<-u26[sample((nrow(u26)), 100), ]
+  u27<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[27])))
+  u27<-u27[sample((nrow(u27)), 100), ]
+  u28<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[28])))
+  u28<-u28[sample((nrow(u28)), 100), ]
+  u29<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[29])))
+  u29<-u29[sample((nrow(u29)), 100), ]
+  u30<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[30])))
+  u30<-u30[sample((nrow(u30)), 100), ]
+  u31<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[31])))
+  u31<-u31[sample((nrow(u31)), 100), ]
+  u32<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[32])))
+  u32<-u32[sample((nrow(u32)), 100), ]
+  u33<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[33])))
+  u33<-u33[sample((nrow(u33)), 100), ]
+  u34<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[34])))
+  u34<-u34[sample((nrow(u34)), 100), ]
+  u35<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[35])))
+  u35<-u35[sample((nrow(u35)), 100), ]
+  u36<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[36])))
+  u36<-u36[sample((nrow(u36)), 100), ]
+  u37<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[37])))
+  u37<-u37[sample((nrow(u37)), 100), ]
+  u38<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[38])))
+  u38<-u38[sample((nrow(u38)), 100), ]
+  u39<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[39])))
+  u39<-u39[sample((nrow(u39)), 100), ]
+  u40<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[40])))
+  u40<-u40[sample((nrow(u40)), 100), ]
+  u41<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[41])))
+  u41<-u41[sample((nrow(u41)), 100), ]
+  u42<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[42])))
+  u42<-u42[sample((nrow(u42)), 100), ]
+  u43<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[43])))
+  u43<-u43[sample((nrow(u43)), 100), ]
+  u45<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[45])))
+  u45<-u45[sample((nrow(u45)), 100), ]
+  u46<-subset(Datos.g, subset=(Datos.g$gen_sp == names(f[46])))
+  u46<-u46[sample((nrow(u46)), 100), ]
+  #Hacemos dataframe con los muestreos
+  Datos.uso.g <- rbind(u1,u2,u3,u4,u5,u6,u7,u8,u9,u10,u11,u12,u13,u14,u15,u16,u17,u18,u19,u20,u21,u22,u23,u24,u25,u26,u27,u28,u29,u30,u31,u32,u33,u34,u35,u36,u37,u38,u39,u40,u41,u42,u43,u45,u46)
+  View(Datos.uso.g)
+  jiji <-aggregate (Datos.uso.g$habitat.grouped ~ Datos.uso.g$gen_sp, FUN = summary, Datos.uso.g)
+  juju<-c(jiji)
+  juju
+  habpref<-as.data.frame(juju)
+  meji<-habpref
+  meji
+  #Transformamos la abundancia en presencia o ausencia, 
+  row.names(meji)<- meji[,1]
+  View(mejib)
+  mejib<-meji[,-c(1,6)]
+  mejib<-replace(mejib, mejib>1,1)
+  momo<-apply(mejib, MARGIN=2, FUN=as.numeric)
+  row.names(momo)<- meji[,1]
+  
+  blank.g[,n]<-rowSums(momo)
+}
+View(blank.g)
+#Vector con el número de habitats usado rareficado
+use.rarefied.g<-rowSums(blank.g)/100
+use.rarefied.g
+observeds.g[,4]
+#Habitats agrupados, ver los cuantiles de las preferencias de habitats------
+#Can you feel it?
+
+#Sacamos la matriz de observados
+summary(Datos.g$gen_sp, maxsum=500)
+jiji <-aggregate (Datos.g$habitat.grouped ~ Datos.g$gen_sp, FUN = summary, Datos.g)
+juju<-c(jiji)
+juju
+habpref<-as.data.frame(juju)
+
+meji<-habpref[-1,]
+momo<-apply(meji, MARGIN=2, FUN=as.numeric)
+row.names(momo)<- meji[,1]
+momomo<-momo[,-c(1,6)]
+momomo<-as.data.frame(momomo)
+View(momomo)
+#Filtramos para que solo aparezcan las especies que solo tienen >100 observaciones
+
+summmm<-rowSums(momomo)
+momomosb<-cbind(momomo,summmm)
+momomost<-subset(momomosb, subset=momomosb$summmm>100)
+
+View(momomost)
+momomost<-momomost[,1:4]
+observeds.g<-momomost
+View(observeds.g)
+nmodels
+rownames(observeds)
+a
+
+library(bipartite)
+#Con este comando extraemos 1000 matrices de interacción de esperados
+nmodels.g<-nullmodel(observeds.g, N=1000, method="r2dtable")
+
+
+View(Datos.g2)
+View(Datos.g)
+
+
+names(observeds.g)
+
+lista.ong<-list()
+lista.ong.c<-list()
+lista.pcg<-list()
+lista.pcg.c<-list()
+lista.fog<-list()
+lista.fog.c<-list()
+lista.urg<-list()
+lista.urg.c<-list()
+uno.uno<-NULL
+for (k in 1:nrow(observeds.g)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels.g[[n]][k,1]
+  }
+  lista.ong.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.ong[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds.g[k,1])
+  
+}
+
+for (k in 1:nrow(observeds.g)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels.g[[n]][k,2]
+  }
+  lista.pcg.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.pcg[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds.g[k,2])
+  
+}
+
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels.g[[n]][k,3]
+  }
+  lista.fog.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.fog[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds.g[k,3])
+  
+}
+for (k in 1:nrow(observeds)) {
+  
+  for (n in 1:1000) {
+    uno.uno[n]<-nmodels.g[[n]][k,4]
+  }
+  lista.urg.c[[k]]<-quantile(uno.uno,probs = seq(0,1,0.01))
+  lista.urg[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds.g[k,4])
+  
+}
+
+lista.ong
+lista.ong.c
+lista.pcg
+lista.pcg.c
+lista.fog
+lista.fog.c
+lista.urg
+lista.urg.c
+
+
+View(observeds.g)
