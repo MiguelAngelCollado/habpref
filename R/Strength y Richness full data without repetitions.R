@@ -555,6 +555,9 @@ buff2 <- read.csv("~/Desktop/Tesis/R/habpref full data/extracted/2006cover1000mb
 buff3 <- read.csv("~/Desktop/Tesis/R/habpref full data/extracted/2011cover1000mbuffer.csv")
 buff<- rbind(buff1,buff2,buff3)
 buff<-as.data.frame(buff)
+
+
+summary(buff$cover2)
 head(buff)
 View(buff)
 #melt(buff)
@@ -588,6 +591,7 @@ plot(1:100, wss, type="b", xlab="Number of Clusters",
 fit <- kmeans(buff, 20) # Seleccionamos 20 grupos
 # obtenemos los centroides 
 centroides<-aggregate(buff ,by=list(fit$cluster),FUN=mean)
+View(centroides)
 warnings()
 setwd("/Users/Bartomeus_lab/Desktop/Tesis/R/habpref full data/Results")
 getwd()
@@ -1580,3 +1584,127 @@ satellite.map(woody)
 nrow(evergreen)
 nrow(deciduous)
 nrow(mixed)
+
+
+
+#Calcular beta diversity con slope de la relación semilogarítmica----
+#a través de la slope de la relación semilogarítmica del número
+#de especies esperado con el log del sample size
+
+int.mat<-aggregate(Datos6$habitat.extracted~Datos6$gen_sp, FUN = summary, Datos6)
+jeje<-c(int.mat)
+jiji<-c(jaja)
+#lo convertimos en dataframe
+jeje<-as.data.frame(jeje)
+jiji<-as.data.frame(jeje)
+row.names(jejem)<- jeje[,1]
+jejem<-jeje[,-1]
+jejem<-apply(jejem, MARGIN=2, FUN=as.numeric)
+row.names(jejem)<- jeje[,1]
+#Esta es nuestra matriz
+int.mat<-jejem
+nrow(int.mat)
+View(int.mat)
+int.mat<-int.mat[,-11]
+library(iNEXT)
+
+Ss<-summary(Datos6$habitat.extracted)
+Ss<-as.data.frame(Ss)
+Ss<-Ss[-11,1]
+
+cc.c<-iNEXT(int.mat[,3], datatype = "abundance", endpoint = (Ss[3,1]))
+CC.c<-cc.c$iNextEst[,c(1,7)]
+plot(CC.c$m,CC.c$SC)
+CC.c$log.m<-log(CC.c$m)
+CC.c$log.SC<-log(CC.c$SC)
+
+plot(CC.c$log.m,(CC.c$SC)*100, xlab="Log n individuals", ylab= "% Diversity covered")
+
+CC.c.lm<-lm(CC.c$log.m ~ CC.c$SC)
+CC.c.lm$coefficients
+
+lista.b<-list()
+####
+Datos6
+#Extraigo primero una lista con  todas los puntos de las curvas para cada habitat
+for (n in 1:14) { 
+  cc.c<-iNEXT(int.mat[,n], datatype = "abundance", endpoint = (Ss[n]))
+CC.c<-cc.c$iNextEst[,c(1,4)]
+  CC.c$log.m<-log(CC.c$m)
+  CC.c$log.qD<-log(CC.c$qD)
+  lista.b[[n]] <- CC.c
+  }
+lista.b
+plot(lista.b[[1]][,1],lista.b[[1]][,2], xlab= "m", ylab="qD")
+plot(lista.b[[1]][,3],lista.b[[1]][,4], xlab="log number of individuals", ylab="Log number of species")
+
+#Slopes para ind~sp
+lista.c<-list()
+for (n in 1:14) { 
+agg<-lm(lista.b[[n]][,1]~lista.b[[n]][,2])
+lista.c[[n]]<-agg$coefficients
+}
+lista.c
+
+
+#Slopes para log(ind)~sp
+lista.d<-list()
+for (n in 1:14) { 
+  agg<-lm(lista.b[[n]][,3]~lista.b[[n]][,2])
+  lista.d[[n]]<-agg$coefficients
+}
+lista.d
+
+#Slopes para log(ind)~log(sp)
+lista.e<-list()
+for (n in 1:14) { 
+  agg<-lm(lista.b[[n]][,3]~lista.b[[n]][,4])
+  lista.e[[n]]<-agg$coefficients
+}
+lista.e
+
+#Calculamos las mismas slopes pero esta vez usando el mismo nivel de coverage para todas
+samplesize.b<-NULL
+for (n in 1:14){
+  c<-estimateD(int.mat[,n], datatype = "abundance", base= "coverage", level = 0.60)
+  samplesize.b[n]<-c
+}
+samplesize.b[14]
+Ss
+##
+
+
+lista.bb<-list()
+#Extraigo primero una lista con  todas los puntos de las curvas para cada habitat
+for (n in 1:14) { 
+  cc.c<-iNEXT(int.mat[,n], datatype = "abundance", endpoint = (samplesize.b[[n]]))
+  CC.c<-cc.c$iNextEst[,c(1,4)]
+  CC.c$log.m<-log(CC.c$m)
+  CC.c$log.qD<-log(CC.c$qD)
+  lista.bb[[n]] <- CC.c
+}
+lista.bb
+
+#Slopes para ind~sp
+lista.ccc<-list()
+for (n in 1:14) { 
+  agg<-lm(lista.bb[[n]][,1]~lista.bb[[n]][,2])
+  lista.ccc[[n]]<-agg$coefficients
+}
+lista.ccc
+
+#Slopes para log ind ~ log sp
+lista.ddd<-list()
+for (n in 1:14) { 
+  agg<-lm(lista.bb[[n]][,3]~lista.bb[[n]][,4])
+  lista.ddd[[n]]<-agg$coefficients
+}
+lista.ddd
+
+#Slopes para log ind ~ sp
+lista.eee<-list()
+for (n in 1:14) { 
+  agg<-lm(lista.bb[[n]][,3]~lista.bb[[n]][,1])
+  lista.eee[[n]]<-agg$coefficients
+}
+lista.eee
