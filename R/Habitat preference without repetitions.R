@@ -232,6 +232,8 @@ head(observeds)
 #0.95
 ##Vamos a crear una matriz con los los cuartiles .05 y otra con los cuartiles .95
 #Empezamos por Barren Land, y seguimos para el resto de habitats
+
+#nota IB: esta parte del codigo no la veo clara, pero es propensa a arrastrar errores.
 menor=NULL
 mayor=NULL
 med=NULL
@@ -621,6 +623,7 @@ names(exploiters)<-c("BarrenLand", "Coastal", "Cultivated Crops" ,"DeciduousFore
 #no solo en nuestro subset, por eso vamos a comprobar qué especies se distribuyen de forma
 #amplia
 full<-subset(sd.4, subset=(country=="USA"))
+#IB: de donde viene sd.4!
 
 sd.8<-full
 #
@@ -1130,6 +1133,7 @@ averr<-subset(aver, subset=(   ( (aver$latitude)>43.0)==TRUE |
 nrow(averr)
 satellite.map(aver)
 
+#IB: for loop!!
 
 #Número de exploiters por habitat (45 especies de referencia)----
 nrow(exploiters)
@@ -1609,7 +1613,7 @@ merger<-subset(merger, subset=(!merger$gen_sp == "Triepeolus obliteratus" &
                                  !merger$gen_sp == "Andrena clarkella"&
                                  !merger$gen_sp == "Chrysis angolensis"&
                                  !merger$gen_sp == ""))
-
+#IB: esto deberia ser más eficiente next time.
 
 #Ahora retiramos las repeticiones en el punto de muestreo
 names(merger)

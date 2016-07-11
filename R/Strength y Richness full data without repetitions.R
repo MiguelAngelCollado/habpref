@@ -2,6 +2,10 @@
 getwd()
 Datos1 <- read.csv("~/Desktop/Tesis/R/habpref full data/Datos1.csv")
 
+#como lo tengo un proyecto puedo hacer:
+Datos1 <- read.csv("data/Datos1.csv")
+#y el path es el mismo para t y para mi
+
 #Agruamos habitats herbaceos con pastos
 Datos1$habitat.extracted <- replace(Datos1$habitat.extracted, Datos1$habitat.extracted=="Hay/Pasture", "Herbaceuous")
 #Agrupamos habitats como en el paper de Koh et al 2015
@@ -11,6 +15,9 @@ levels(Datos1$habitat.extracted)[levels(Datos1$habitat.extracted)=="Herbaceuous"
 summary(Datos1$habitat.extracted)
 
 sumcord<-(Datos1$latitude + Datos1$longitude)
+#asumo que las sumas son unicas dadas las distribuciones de lat i long
+#pero podrian llegar a no serlo (y seguro no lo son a nivel mundial)
+#mejor <- paste(Datos1$latitude, Datos1$longitude, sep = "_")
 Datos9<-(cbind(Datos1,sumcord))
 
 tonto<- unique(Datos9[,c("sumcord", "gen_sp")])
@@ -28,7 +35,11 @@ vamos<-cbind(row,identifi)
 head(Datos1)
 nrow(vamos)
 Datos1<-merge(Datos1,vamos)
+#lo de aqui arriba un poco guarrete :D
+head(Datos1)
+
 #Por rapidez identifiqué los singletones y los extraigo nombrándolos uno a uno
+#Tus huevos por rapidez... hacerlo asi es propenso a errores. No lo cambies ya, pero para la proxima
 ####Strength sin singletones----
 summary(Datos6$gen_sp, maxsum= 465)
 Datos6<-subset(Datos1, subset=(!Datos1$gen_sp == "Triepeolus obliteratus" & 
@@ -173,11 +184,11 @@ summary(Datos6$habitat.extracted)
 #Creamos una matriz de interacciones con nuestros datos
 int.mat<-aggregate(Datos6$habitat.extracted~Datos6$gen_sp, FUN = summary, Datos6)
 jeje<-c(int.mat)
-jiji<-c(jaja)
+jiji<-c(jaja) #jaja no existe. Pon nombres que se entiendan, please, o seguir el codigo es muy chungo.
 #lo convertimos en dataframe
 jeje<-as.data.frame(jeje)
 jiji<-as.data.frame(jeje)
-row.names(jejem)<- jeje[,1]
+row.names(jejem)<- jeje[,1] #jejem no existe aun!
 jejem<-jeje[,-1]
 jejem<-apply(jejem, MARGIN=2, FUN=as.numeric)
 row.names(jejem)<- jeje[,1]
@@ -223,7 +234,7 @@ colnames(int.mat)
 samplesize<-NULL
 for (n in 1:14){
   c<-estimateD(int.mat[,n], datatype = "abundance", base= "coverage", level = 0.60)
-  samplesize[n]<-c
+  samplesize[n]<-c$m #a mi no me funciona si no especifico m????!!!!
 }
 colnames(int.mat)
 samplesize
@@ -335,6 +346,8 @@ for (n in 1:100){
   ww100s[n] = c1[14]
   
 }
+
+#este loop se podria anidar por habitat, pero bueno. It's fine.
 bl100s
 co100s
 cc100s
@@ -1591,13 +1604,14 @@ nrow(mixed)
 #a través de la slope de la relación semilogarítmica del número
 #de especies esperado con el log del sample size
 
+#idealmente no repetimos codigo, esto esta hecho arriba. 
+#si tienes una seccion de data prep unica mejor.
 int.mat<-aggregate(Datos6$habitat.extracted~Datos6$gen_sp, FUN = summary, Datos6)
 jeje<-c(int.mat)
-jiji<-c(jaja)
+jiji<-c(jaja) #!!!
 #lo convertimos en dataframe
 jeje<-as.data.frame(jeje)
-jiji<-as.data.frame(jeje)
-row.names(jejem)<- jeje[,1]
+jiji<-as.data.frame(jeje) #??
 jejem<-jeje[,-1]
 jejem<-apply(jejem, MARGIN=2, FUN=as.numeric)
 row.names(jejem)<- jeje[,1]
@@ -1612,11 +1626,12 @@ Ss<-summary(Datos6$habitat.extracted)
 Ss<-as.data.frame(Ss)
 Ss<-Ss[-11,1]
 
-cc.c<-iNEXT(int.mat[,3], datatype = "abundance", endpoint = (Ss[3,1]))
+cc.c<-iNEXT(int.mat[,3], datatype = "abundance", endpoint = (Ss[3])) #Ss is a vector!
 CC.c<-cc.c$iNextEst[,c(1,7)]
 plot(CC.c$m,CC.c$SC)
 CC.c$log.m<-log(CC.c$m)
 CC.c$log.SC<-log(CC.c$SC)
+#logs can be done directly in plot if you want
 
 plot(CC.c$log.m,(CC.c$SC)*100, xlab="Log n individuals", ylab= "% Diversity covered")
 
@@ -1638,46 +1653,58 @@ lista.b
 plot(lista.b[[1]][,1],lista.b[[1]][,2], xlab= "m", ylab="qD")
 plot(lista.b[[1]][,3],lista.b[[1]][,4], xlab="log number of individuals", ylab="Log number of species")
 
+
 #Slopes para ind~sp
 lista.c<-list()
+plot(lista.b[[n]][,1]~lista.b[[n]][,2], type = "n", xlim = c(0,1000), ylim = c(0,5000))
 for (n in 1:14) { 
 agg<-lm(lista.b[[n]][,1]~lista.b[[n]][,2])
+points(lista.b[[n]][,1]~lista.b[[n]][,2], col = n)
 lista.c[[n]]<-agg$coefficients
 }
 lista.c
+#no lineal
 
 
 #Slopes para log(ind)~sp
 lista.d<-list()
+plot(lista.b[[n]][,1]~lista.b[[n]][,2], type = "n", xlim = c(0,400), ylim = c(0,20))
 for (n in 1:14) { 
   agg<-lm(lista.b[[n]][,3]~lista.b[[n]][,2])
+  points(lista.b[[n]][,3]~lista.b[[n]][,2], col = n)
   lista.d[[n]]<-agg$coefficients
 }
 lista.d
+#no lineal...
 
 #Slopes para log(ind)~log(sp)
 lista.e<-list()
+plot(lista.b[[n]][,1]~lista.b[[n]][,2], type = "n", xlim = c(0,10), ylim = c(0,10))
 for (n in 1:14) { 
-  agg<-lm(lista.b[[n]][,3]~lista.b[[n]][,4])
+  agg<-lm(lista.b[[n]][,3]~ 0 + lista.b[[n]][,4])
+  points(lista.b[[n]][,3]~lista.b[[n]][,4], col = n)
+  abline(agg, col = n)
   lista.e[[n]]<-agg$coefficients
 }
 lista.e
+#not bad... curba un poco al final
 
 #Calculamos las mismas slopes pero esta vez usando el mismo nivel de coverage para todas
 samplesize.b<-NULL
 for (n in 1:14){
   c<-estimateD(int.mat[,n], datatype = "abundance", base= "coverage", level = 0.60)
-  samplesize.b[n]<-c
+  samplesize.b[n]<-c$m #Aqui solo me funciona espceficando m??!!
 }
 samplesize.b[14]
 Ss
 ##
 
-
+#I try with equal sample size, as I think may be better for this particular case.
 lista.bb<-list()
 #Extraigo primero una lista con  todas los puntos de las curvas para cada habitat
 for (n in 1:14) { 
-  cc.c<-iNEXT(int.mat[,n], datatype = "abundance", endpoint = (samplesize.b[[n]]))
+  cc.c<-iNEXT(int.mat[,n], datatype = "abundance", endpoint = min(Ss)) #IB modified this line
+  #cc.c<-iNEXT(int.mat[,n], datatype = "abundance", endpoint = (samplesize.b[[n]]))
   CC.c<-cc.c$iNextEst[,c(1,4)]
   CC.c$log.m<-log(CC.c$m)
   CC.c$log.qD<-log(CC.c$qD)
@@ -1687,24 +1714,100 @@ lista.bb
 
 #Slopes para ind~sp
 lista.ccc<-list()
+plot(lista.bb[[n]][,1]~lista.bb[[n]][,2], type = "n", xlim = c(0,130), ylim = c(0,400))
 for (n in 1:14) { 
-  agg<-lm(lista.bb[[n]][,1]~lista.bb[[n]][,2])
+  agg<-lm(lista.bb[[n]][,1]~ 0 + lista.bb[[n]][,2])
+  points(lista.bb[[n]][,1]~lista.bb[[n]][,2], col = n)
+  abline(agg, col = n)
   lista.ccc[[n]]<-agg$coefficients
 }
 lista.ccc
+#Not lineal
 
 #Slopes para log ind ~ log sp
 lista.ddd<-list()
+plot(lista.bb[[n]][,1]~lista.bb[[n]][,2], type = "n", xlim = c(0,6), ylim = c(0,6))
 for (n in 1:14) { 
-  agg<-lm(lista.bb[[n]][,3]~lista.bb[[n]][,4])
+  agg<-lm(lista.bb[[n]][,3]~ 0 + lista.bb[[n]][,4])
+  points(lista.bb[[n]][,3]~lista.bb[[n]][,4], col = n)
+  abline(agg, col = n)
   lista.ddd[[n]]<-agg$coefficients
 }
 lista.ddd
+#a bit better.
+slopes <- cbind(colnames(int.mat), unlist(lista.ddd))
+slopes[order(slopes[,2]),]
+plot(unlist(lista.ddd)) 
 
 #Slopes para log ind ~ sp
 lista.eee<-list()
+plot(lista.bb[[n]][,1]~lista.bb[[n]][,2], type = "n", xlim = c(0,100), ylim = c(0,10))
 for (n in 1:14) { 
   agg<-lm(lista.bb[[n]][,3]~lista.bb[[n]][,1])
+  points(lista.bb[[n]][,3]~lista.bb[[n]][,1], col = n)
+  abline(agg, col = n)
   lista.eee[[n]]<-agg$coefficients
 }
 lista.eee
+#terrible curved
+
+#anther aproach----
+
+#the rationale is that beta is defined as accumulation curves of sites.
+#I think individuals accumulate too monotonic to see any diference on the mean 
+#species per individual.
+
+library(vegan)
+head(Datos6)
+dat <- Datos6[,c("latitude", "gen_sp", "habitat.extracted", "id")]
+
+habi <- unique(dat$habitat.extracted)
+#run the loop manually first time with i = 1, then you can plot an empty space.
+plot(xx$richness~ xx$sites, xlim = c(1,500), ylim = c(0,400), type = "n")
+Out <- data.frame(habitat = NA, sites = NA, richness = NA)
+for(i in 1:length(habi)){
+  temp <- subset(dat, habitat.extracted == habi[i])
+  temp <- droplevels(temp)
+  com <- table(temp$id, temp$gen_sp)
+  #x <- rarecurve(com)
+  xx <- specaccum(com, method = "rarefaction")
+  #xx <- specaccum(com, method = "random") #both have similar results. 
+  par(new = TRUE)
+  plot(xx$richness~ xx$sites, col = i, xlim = c(1,500), ylim = c(0,400), type = "l")
+  #save output
+  out <- data.frame(habitat = rep(habi[i], length(xx$sites)),
+                    sites = xx$sites,
+                    richness = xx$richness)
+  Out <- rbind(Out, out[-1,])
+}
+
+Out <- Out[-1,]
+head(Out)
+
+#idem as above, run a first loop to create an empty space
+plot(log(temp$richness) ~ log(temp$sites), type = "n", xlim = c(1,5), ylim = c(1,6))
+coef <- c()
+for(i in 1:length(habi)){
+  temp <- subset(Out, habitat == habi[i])
+  m <- lm(log(temp$richness) ~ log(temp$sites))
+  par(new = TRUE)
+  plot(log(temp$richness) ~ log(temp$sites), xlim = c(1,5), ylim = c(1,6))
+  coef[i] <- m$coefficients[2]
+} 
+
+slopes <- cbind(as.character(habi), coef)
+slopes[order(slopes[,2]),]
+# mola, evergreen tiene mucha beta (accumula más rápido), lo que explica su alta richness. 
+# tambien da baja ara crops, pastures, y alta para herbaceous, Barren y scrubs, lo que mola, 
+#por que tienen poca richness pero muy diversa entre sites.
+plot(coef)
+
+#The rationale is that when accumulation sites (even if those have unequal effort), 
+#we mimic the richness area accumulation curves. 
+
+#Si ordenamos los sites por proximidad geografica podemos usar "collector" como metodo.
+# lo ideal seria hacer la media sobre varios runs que añaden sites por proximidad geografica,
+# pero empezando por diferentes sites al azar. Pero yo creo que no hace falta liarse tanto.
+#esto puede ser un resultado para ayudar a explicar y presentado ráspidamente o bien añadido 
+#a una tabla (tenemos alguna que resuma, richness, strength, y qualquier otra cosa a nivel de habitat?)
+#quizas para SUp mat.
