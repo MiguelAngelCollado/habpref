@@ -233,7 +233,7 @@ head(observeds)
 ##Vamos a crear una matriz con los los cuartiles .05 y otra con los cuartiles .95
 #Empezamos por Barren Land, y seguimos para el resto de habitats
 
-#nota IB: esta parte del codigo no la veo clara, pero es propensa a arrastrar errores.
+
 menor=NULL
 mayor=NULL
 med=NULL
@@ -621,9 +621,9 @@ names(exploiters)<-c("BarrenLand", "Coastal", "Cultivated Crops" ,"DeciduousFore
 
 #Para evaluar la preferencia, necesitamos que las especies se distribuyan de forma amplia
 #no solo en nuestro subset, por eso vamos a comprobar qué especies se distribuyen de forma
-#amplia
+#amplia, usamos sd.4 del código de limpieza de datos, que contiene las especies antes de ser
+#filtradas solo para nuestra zona
 full<-subset(sd.4, subset=(country=="USA"))
-#IB: de donde viene sd.4!
 
 sd.8<-full
 #
@@ -1133,7 +1133,6 @@ averr<-subset(aver, subset=(   ( (aver$latitude)>43.0)==TRUE |
 nrow(averr)
 satellite.map(aver)
 
-#IB: for loop!!
 
 #Número de exploiters por habitat (45 especies de referencia)----
 nrow(exploiters)
@@ -1613,7 +1612,7 @@ merger<-subset(merger, subset=(!merger$gen_sp == "Triepeolus obliteratus" &
                                  !merger$gen_sp == "Andrena clarkella"&
                                  !merger$gen_sp == "Chrysis angolensis"&
                                  !merger$gen_sp == ""))
-#IB: esto deberia ser más eficiente next time.
+
 
 #Ahora retiramos las repeticiones en el punto de muestreo
 names(merger)
@@ -3274,7 +3273,7 @@ q[["Andrena bradleyi"]]
 nrow(Datos6)
 habitat.grouped <- Datos6$habitat.extracted
 Datos.g <- cbind(Datos6,habitat.grouped)
-Datos.g <- replace(Datos.g, Datos.g$habitat.grouped == "Developed, High Intensity", "Urban")
+View(Datos.g)
 #Nombramos los nuevos grupos
 levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Developed, High Intensity"]<-"Urban"
 levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Developed, Medium Intensity"]<-"Urban"
@@ -3293,12 +3292,12 @@ levels(Datos.g$habitat.grouped)[levels(Datos.g$habitat.grouped)=="Shrub/Scrub"]<
 summary(Datos.g$habitat.grouped)
 #Extracción de matriz de interacciones y filtrado para solo usar especies con más
 #de 100 individuos en nuestro muestreo
-summary(Datos.g2$gen_sp, maxsum=500)
-jiji <-aggregate (Datos.g2$habitat.grouped ~ Datos.g2$gen_sp, FUN = summary, Datos.g2)
+summary(Datos.g$gen_sp, maxsum=500)
+jiji <-aggregate (Datos.g$habitat.grouped ~ Datos.g$gen_sp, FUN = summary, Datos.g)
 juju<-c(jiji)
 juju
 habpref<-as.data.frame(juju)
-row.names(habpref)<-habpref$Datos.g2.gen_sp
+row.names(habpref)<-habpref$Datos.g.gen_sp
 meji<-habpref[,-1]
 meji <- meji[,-5]
 momo<-apply(meji, MARGIN=2, FUN=as.numeric)
@@ -3461,10 +3460,10 @@ exploiters.g2 <- exploiters
 
 
 
-nrow(subset(exploiters.g, subset = (exploiters.g[,1]<0.1)))
-nrow(subset(exploiters.g, subset = (exploiters.g[,2]<0.1)))
-nrow(subset(exploiters.g, subset = (exploiters.g[,3]<0.1)))
-nrow(subset(exploiters.g, subset = (exploiters.g[,4]<0.1)))
+nrow(subset(exploiters.g2, subset = (exploiters.g2[,1]<0.1)))
+nrow(subset(exploiters.g2, subset = (exploiters.g2[,2]<0.1)))
+nrow(subset(exploiters.g2, subset = (exploiters.g2[,3]<0.1)))
+nrow(subset(exploiters.g2, subset = (exploiters.g2[,4]<0.1)))
 
 #Creamos data frame con el número de exploiters y avoiders de cada grupo de habitats
 
@@ -3899,6 +3898,28 @@ use.rarefied<-rowSums(blank)/100
 use.rarefied
 
 #Cuantiles de las preferencias de habitats------
+summary(Datos6$gen_sp, maxsum=500)
+jiji <-aggregate (Datos6$habitat.extracted ~ Datos6$gen_sp, FUN = summary, Datos6)
+juju<-c(jiji)
+juju
+habpref<-as.data.frame(juju)
+
+meji<-habpref[-1,]
+momo<-apply(meji, MARGIN=2, FUN=as.numeric)
+row.names(momo)<- meji[,1]
+momomo<-momo[,-1]
+momomo<-as.data.frame(momomo)
+#Filtramos para que solo aparezcan las especies que solo tienen >100 observaciones
+
+summmm<-rowSums(momomo)
+momomosb<-cbind(momomo,summmm)
+momomost<-subset(momomosb, subset=momomosb$summmm>100)
+momomost<-momomost[,1:15]
+observeds<-momomost
+View(observeds)
+
+nmodels
+
 lista.bl<-list()
 lista.bl.c<-list()
 lista.co<-list()
@@ -4098,15 +4119,11 @@ lista.ww.c
 summary(Datos.g$habitat.grouped)
 
 
-
-
-
-
 b
 d
 
 f<-summary(Datos.g$gen_sp)
-
+View(Datos.g)
 blanknames <- c("Agapostemon virescens","Andrena carlini","Andrena cressonii","Andrena erigeniae","Andrena nasonii","Andrena perplexa","Andrena violae","Apis mellifera","Augochlora pura","Augochlorella aurata","Bombus bimaculatus","Bombus fervidus","Bombus griseocollis","Calliopsis andreniformis","Ceratina calcarata/dupla/mikmaqi","Ceratina strenua","Halictus confusus","Halictus ligatus/poeyi","Halictus rubicundus","Hylaeus affinis/modestus","Lasioglossum bruneri","Lasioglossum callidum","Lasioglossum coriaceum","Lasioglossum cressonii","Lasioglossum hitchensi","Lasioglossum illinoense","Lasioglossum imitatum","Lasioglossum near_admirandum","Lasioglossum oblongum","Lasioglossum pectorale","Lasioglossum pilosum","Lasioglossum tegulare","Lasioglossum versatum","Megachile brevis","Megachile mendica","Melissodes bimaculata","Nomada bidentate_group","Nomada pygmaea","Osmia atriventris","Osmia bucephala","Osmia georgica","Osmia pumila","Osmia taurus","Ptilothrix bombiformis","Xylocopa virginica")
 blank.g<-data.frame(row.names = blanknames)
 for (n in 1:100) { 
@@ -4252,7 +4269,7 @@ momomost<-momomost[,1:4]
 observeds.g<-momomost
 View(observeds.g)
 nmodels
-rownames(observeds)
+rownames(observeds.g)
 a
 
 library(bipartite)
@@ -4265,6 +4282,7 @@ View(Datos.g)
 
 
 names(observeds.g)
+#Hacemos unas listas para ver los cuantiles en los cuatro diferentes grupos
 
 lista.ong<-list()
 lista.ong.c<-list()
@@ -4294,8 +4312,8 @@ for (k in 1:nrow(observeds.g)) {
   lista.pcg[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds.g[k,2])
   
 }
-
-for (k in 1:nrow(observeds)) {
+nmodels.g[[1000]][45,3]
+for (k in 1:nrow(observeds.g)) {
   
   for (n in 1:1000) {
     uno.uno[n]<-nmodels.g[[n]][k,3]
@@ -4304,7 +4322,7 @@ for (k in 1:nrow(observeds)) {
   lista.fog[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds.g[k,3])
   
 }
-for (k in 1:nrow(observeds)) {
+for (k in 1:nrow(observeds.g)) {
   
   for (n in 1:1000) {
     uno.uno[n]<-nmodels.g[[n]][k,4]
@@ -4313,7 +4331,7 @@ for (k in 1:nrow(observeds)) {
   lista.urg[[k]]<-which(quantile(uno.uno,probs = seq(0,1,0.01))==observeds.g[k,4])
   
 }
-
+observeds.g
 lista.ong
 lista.ong.c
 lista.pcg
@@ -4325,3 +4343,89 @@ lista.urg.c
 
 
 View(observeds.g)
+getwd()
+write.csv(observeds.g,"observeds.csv")
+Datos6
+
+seq(0,1,0.05)
+quantiles.grouped <- read.csv("~/Desktop/Tesis/R/habpref full data/Results/Cuantiles habitat agrupados.csv", row.names = 1)
+quantiles.habitat <- read.csv("~/Desktop/Tesis/R/habpref full data/Results/Cuantiles habitats.csv", row.names=1)
+View(quantiles.habitat)
+
+??histogram
+histogram(quantiles.grouped$Urban, breaks = seq(0,1,0.05), col = "grey", xlab="Quantiles", ylim = c(0,33), main= "Urban Preference Quantiles")
+histogram(quantiles.grouped$Forests, breaks = seq(0,1,0.05), col = "grey", xlab="Quantiles", ylim = c(0,33), main= "Forest Preference Quantiles")
+histogram(quantiles.grouped$Pasture.and.Crops, breaks = seq(0,1,0.05), col = "grey", xlab="Quantiles", ylim = c(0,33), main= "Crops and Pasture Preference Quantiles")
+
+#Queremos saber el número de especies que tienen preferencia
+#Preferencia general
+quantiles.habitat<-quantiles.habitat[,-1]
+quantiles.grouped<-quantiles.grouped[,-1]
+prefs<-subset(quantiles.habitat, subset=(quantiles.habitat$Barren.Land>0.949|quantiles.habitat$Coastal>0.949|quantiles.habitat$Cultivated.Crops>0.949|quantiles.habitat$Deciduous.Forest>0.949|quantiles.habitat$Developed..High.Intensity>0.949|quantiles.habitat$Developed..Low.Intensity>0.949|quantiles.habitat$Developed..Medium.Intensity>0.949|quantiles.habitat$Developed..Open.Space>0.949|quantiles.habitat$Emergent.Herbaceuous.Wetlands>0.949|quantiles.habitat$Evergreen.Forest>0.949|quantiles.habitat$Herbaceuous.Hay.Pasture>0.949|quantiles.habitat$Mixed.Forest>0.949|quantiles.habitat$Shrub.Scrub>0.949|quantiles.habitat$Woody.Wetlands>0.949))
+nrow(prefs)
+prefs.g<-subset(quantiles.grouped, subset=(quantiles.grouped$Forests>0.949|quantiles.grouped$Urban>0.949|quantiles.grouped$Pasture.and.Crops>0.949|quantiles.grouped$Other.Natural>0.949))
+nrow(quantiles.grouped)
+nrow(prefs.g)
+nrow(prefs.f<-subset(quantiles.grouped, subset=(quantiles.grouped$Forests>0.949)))
+nrow(prefs.u<-subset(quantiles.grouped, subset=(quantiles.grouped$Urban>0.949)))
+prefs.a<-subset(quantiles.grouped, subset=(quantiles.grouped$Pasture.and.Crops>0.949))
+
+#Avoidance
+avoid.u<-subset(quantiles.grouped, subset=(quantiles.grouped$Urban<0.0501))
+avoid.a<-subset(quantiles.grouped, subset=(quantiles.grouped$Pasture.and.Crops<0.0501))
+avoid.f<-subset(quantiles.grouped, subset=(quantiles.grouped$Forests<0.0501))
+
+#Construimos una lista para ver fácilmente exploiters y avoiders, tanto para los habitats
+#agrupados como para todos
+PREFERENCIAS.g<-list()
+PREFERENCIAS.g$Preference.forest<-row.names(prefs.f)
+PREFERENCIAS.g$Preference.urban<-row.names(prefs.u)
+PREFERENCIAS.g$Preference.crops<-row.names(prefs.a)
+PREFERENCIAS.g$Avoidance.forest<-row.names(avoid.f)
+PREFERENCIAS.g$Avoidance.urban<-row.names(avoid.u)
+PREFERENCIAS.g$Avoidance.crops<-row.names(avoid.a)
+PREFERENCIAS.g
+
+PREFERENCIAS<-list()
+PREFERENCIAS$Preference.barrenland<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Barren.Land>0.949)))
+PREFERENCIAS$Preference.coastal<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Coastal>0.949)))
+PREFERENCIAS$Preference.crops<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Cultivated.Crops>0.949)))
+PREFERENCIAS$Preference.deciduousforests<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Deciduous.Forest>0.949)))
+PREFERENCIAS$Preference.developedhigh<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Developed..High.Intensity>0.949)))
+PREFERENCIAS$Preference.developedlow<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Developed..Low.Intensity>0.949)))
+PREFERENCIAS$Preference.developedmedium<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Developed..Medium.Intensity>0.949)))
+PREFERENCIAS$Preference.developedopen<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Developed..Open.Space>0.949)))
+PREFERENCIAS$Preference.emergentherbaceouswetlands<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Emergent.Herbaceuous.Wetlands>0.949)))
+PREFERENCIAS$Preference.evergreenforest<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Evergreen.Forest>0.949)))
+PREFERENCIAS$Preference.herbaceoushaypasture<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Herbaceuous.Hay.Pasture>0.949)))
+PREFERENCIAS$Preference.mixedforest<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Mixed.Forest>0.949)))
+PREFERENCIAS$Preference.shrubscrub<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Shrub.Scrub>0.949)))
+PREFERENCIAS$Preference.woodywetlands<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Woody.Wetlands>0.949)))
+
+PREFERENCIAS$Avoidance.barrenland<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Barren.Land<0.0501)))
+PREFERENCIAS$Avoidance.coastal<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Coastal<0.0501)))
+PREFERENCIAS$Avoidance.crops<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Cultivated.Crops<0.0501)))
+PREFERENCIAS$Avoidance.deciduousforests<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Deciduous.Forest<0.0501)))
+PREFERENCIAS$Avoidance.developedhigh<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Developed..High.Intensity<0.0501)))
+PREFERENCIAS$Avoidance.developedlow<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Developed..Low.Intensity<0.0501)))
+PREFERENCIAS$Avoidance.developedmedium<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Developed..Medium.Intensity<0.0501)))
+PREFERENCIAS$Avoidance.developedopen<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Developed..Open.Space<0.0501)))
+PREFERENCIAS$Avoidance.emergentherbaceouswetlands<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Emergent.Herbaceuous.Wetlands<0.0501)))
+PREFERENCIAS$Avoidance.evergreenforest<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Evergreen.Forest<0.0501)))
+PREFERENCIAS$Avoidance.herbaceoushaypasture<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Herbaceuous.Hay.Pasture<0.0501)))
+PREFERENCIAS$Avoidance.mixedforest<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Mixed.Forest<0.0501)))
+PREFERENCIAS$Avoidance.shrubscrub<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Shrub.Scrub<0.0501)))
+PREFERENCIAS$Avoidance.woodywetlands<-row.names(subset(quantiles.habitat, subset=(quantiles.habitat$Woody.Wetlands<0.0501)))
+
+PREFERENCIAS
+PREFERENCIAS.g
+
+PREFERENCIAS.g$Preference.forest
+PREFERENCIAS.g$Avoidance.urban
+
+PREFERENCIAS.g$Preference.urban
+PREFERENCIAS.g$Avoidance.forest
+plot(quantiles.grouped$Forests,quantiles.grouped$Urban)
+
+
+Datos6
